@@ -7,9 +7,6 @@
 #include <kaa/kaa_error.h>
 #include <kaa/platform/kaa_client.h>
 #include <kaa/utilities/kaa_log.h>
-#include <kaa/gen/kaa_led_event_class_family.h>
-#include <kaa/kaa_event.h>
-#include <kaa/platform/ext_event_listeners_callback.h>
 
 #include "util.h"
 #include "serial.h"
@@ -20,12 +17,12 @@ static kaa_client_t *kaa_client;
 int main(int argc, char *argv[])
 {
 	open_serial("/dev/ttyUSB0");
-	
+
 	init_serial();
-	
+
 	printf("Kaa SDK client started\n");
 	kaa_error_t error_code;
-	
+
 	/* Build Kaa client */
 
 	error_code = kaa_client_create(&kaa_client, NULL);
@@ -36,8 +33,8 @@ int main(int argc, char *argv[])
 	error_code = kaa_notification_register(
 			kaa_client_get_context(kaa_client)->notification_manager);
 	KAA_RETURN_IF_ERROR(error_code, "Failed to register notification");
-	
-	error_code = kaa_client_start(kaa_client, external_process, NULL, 1);
+
+	error_code = kaa_client_start(kaa_client, NULL, NULL, 0);
 	KAA_RETURN_IF_ERROR(error_code, "Failed to start Kaa main loop");
 
 	kaa_client_destroy(kaa_client);

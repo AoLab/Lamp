@@ -8,7 +8,8 @@
 # =======================================
 add_executable(Lamp.out main.c
 	serial.c serial.h
-	common.c common.h)
+	common.c common.h
+    notification.c notification.h)
 
 include_directories("${Lamp_SOURCE_DIR}/libs/src")
 target_link_libraries(Lamp.out kaac crypto)
