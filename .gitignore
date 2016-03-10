@@ -30,3 +30,15 @@
 
 # Debug files
 *.dSYM/
+CMakeCache.txt
+CMakeFiles
+CMakeScripts
+Makefile
+cmake_install.cmake
+install_manifest.txt
+build/
+
+# Kaa auto generated files
+libs/
+kaa_key.pub
+kaa_status.bin
