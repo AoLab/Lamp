@@ -27,43 +27,43 @@ static int fd;
 
 void open_serial(const char *dev)
 {
-    fd = open(dev, O_RDWR | O_NOCTTY | O_NDELAY);
-    if (fd <= 0)
-        sdie("Unable to open %s - ", dev);
+	fd = open(dev, O_RDWR | O_NOCTTY | O_NDELAY);
+	if (fd <= 0)
+		sdie("Unable to open %s - ", dev);
 }
 
 void init_serial(void)
 {
-    TEST_FD();
+	TEST_FD();
 
-    ulog("TEST_FD ejra :)");
+	ulog("TEST_FD ejra :)");
 
-    struct termios old_tio, tio;
+	struct termios old_tio, tio;
 
-    /* ** Set serial port tio ** */
+	/* ** Set serial port tio ** */
 
-    /* Backup port settings */
-    tcgetattr(fd, &old_tio);
-    ulog("TEST_FD tcgetattr:)");
-    tcflush(fd, TCIOFLUSH);
+	/* Backup port settings */
+	tcgetattr(fd, &old_tio);
+	ulog("TEST_FD tcgetattr:)");
+	tcflush(fd, TCIOFLUSH);
 
-    memset(&tio, 0, sizeof(tio));
+	memset(&tio, 0, sizeof(tio));
 
-    cfsetspeed(&tio, B9600);
+	cfsetspeed(&tio, B9600);
 
-    tcsetattr(fd, TCSAFLUSH, &tio);
-    ulog("TEST_FD tcsetattr:)");
-    tcflush(fd, TCIOFLUSH);
+	tcsetattr(fd, TCSAFLUSH, &tio);
+	ulog("TEST_FD tcsetattr:)");
+	tcflush(fd, TCIOFLUSH);
 }
 
 int writechar(char c)
 {
-    TEST_FD();
+	TEST_FD();
 
-    int put = 0;
+	int put = 0;
 
-    put = write(fd, &c, 1);
-    fsync(fd);
+	put = write(fd, &c, 1);
+	fsync(fd);
 
-    return put;
+	return put;
 }

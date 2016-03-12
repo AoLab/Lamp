@@ -20,70 +20,70 @@
 
 void sdie(const char *fmt, ...)
 {
-    char buf[MAX_BUFF];
-    va_list args;
+	char buf[MAX_BUFF];
+	va_list args;
 
-    va_start(args, fmt);
-    vsprintf(buf, fmt, args);
-    va_end(args);
+	va_start(args, fmt);
+	vsprintf(buf, fmt, args);
+	va_end(args);
 
-    perror(buf);
-    exit(EXIT_FAILURE);
+	perror(buf);
+	exit(EXIT_FAILURE);
 }
 
 void udie(const char *fmt, ...)
 {
-    char buf[MAX_BUFF];
-    va_list args;
+	char buf[MAX_BUFF];
+	va_list args;
 
-    va_start(args, fmt);
-    vsprintf(buf, fmt, args);
-    va_end(args);
+	va_start(args, fmt);
+	vsprintf(buf, fmt, args);
+	va_end(args);
 
-    size_t len = strlen(buf);
+	size_t len = strlen(buf);
 
-    buf[len] = '\n';
-    buf[len + 1] = 0;
+	buf[len] = '\n';
+	buf[len + 1] = 0;
 
-    fputs(buf, stderr);
-    exit(EXIT_FAILURE);
+	fputs(buf, stderr);
+	exit(EXIT_FAILURE);
 }
 
 void slog(const char *fmt, ...)
 {
 #ifdef DEBUG
-    printf("DEBUG: ");
-    fflush(stdout);
+	printf("DEBUG: ");
+	fflush(stdout);
 
-    char buf[MAX_BUFF];
-    va_list args;
+	char buf[MAX_BUFF];
+	va_list args;
 
-    va_start(args, fmt);
-    vsprintf(buf, fmt, args);
-    va_end(args);
+	va_start(args, fmt);
+	vsprintf(buf, fmt, args);
+	va_end(args);
 
-    perror(buf);
+	perror(buf);
 #endif
 }
 
 void ulog(const char *fmt, ...)
 {
 #ifdef DEBUG
-    printf("DEBUG: ");
-    fflush(stdout);
+	printf("DEBUG: ");
+	fflush(stdout);
 
-    char buf[MAX_BUFF];
-    va_list args;
+	char buf[MAX_BUFF];
+	va_list args;
 
-    va_start(args, fmt);
-    vsprintf(buf, fmt, args);
-    va_end(args);
+	va_start(args, fmt);
+	vsprintf(buf, fmt, args);
+	va_end(args);
 
-    size_t len = strlen(buf);
+	size_t len = strlen(buf);
 
-    buf[len] = '\n';
-    buf[len + 1] = 0;
+	buf[len] = '\n';
+	buf[len + 1] = 0;
 
-    fputs(buf, stderr);
+	fputs(buf, stderr);
 #endif
 }
