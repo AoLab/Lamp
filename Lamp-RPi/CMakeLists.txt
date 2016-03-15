@@ -7,7 +7,7 @@
 # [] Created By : Parham Alvani (parham.alvani@gmail.com)
 # =======================================
 cmake_minimum_required(VERSION 2.8.8)
-project(Lamp-Rpi)
+project(Lamp-RPi)
 enable_language(C)
 
 find_package(OpenSSL REQUIRED)
