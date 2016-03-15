@@ -11,8 +11,8 @@ This project is intended to create an Internet of Things for Amirkabir Universit
   3. Registered our notification topic in the endpoint groups.
 
 ## Understanding codes  
-This guide is useful for learning UNIX C Serial Programming:[UNIX Serial C Programming](https://www.cmrr.umn.edu/~strupp/serial.html)
-
+* This guide is useful for learning UNIX C Serial Programming:[UNIX Serial C Programming](https://www.cmrr.umn.edu/~strupp/serial.html)
+* This guide is useful for connecting your application to KAA server :[Your first KAA application](https://docs.kaaproject.org/display/KAA/Your+first+Kaa+application)
 ## Contributors
 * [Prof. Bahador Bakhshi](http://ceit.aut.ac.ir/~bakhshis/)
 * [Parham Alvani](http://1995parham.github.io/)
