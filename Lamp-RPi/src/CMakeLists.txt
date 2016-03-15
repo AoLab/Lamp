@@ -11,7 +11,7 @@ add_executable(Lamp-RPi.out main.c
 	common.c common.h
     notification.c notification.h)
 
-include_directories("${Lamp_SOURCE_DIR}/libs/src")
+include_directories("${Lamp-RPi_SOURCE_DIR}/libs/src")
 target_link_libraries(Lamp-RPi.out kaac crypto)
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=gnu99 -g -Wall")
