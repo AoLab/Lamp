@@ -6,12 +6,12 @@
 #
 # [] Created By : Parham Alvani (parham.alvani@gmail.com)
 # =======================================
-add_executable(Lamp.out main.c
+add_executable(Lamp-RPi.out main.c
 	serial.c serial.h
 	common.c common.h
     notification.c notification.h)
 
 include_directories("${Lamp_SOURCE_DIR}/libs/src")
-target_link_libraries(Lamp.out kaac crypto)
+target_link_libraries(Lamp-RPi.out kaac crypto)
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=gnu99 -g -Wall")
