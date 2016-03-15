@@ -18,6 +18,7 @@
 #include <signal.h>
 
 #include <kaa/kaa_notification_manager.h>
+#include <kaa/kaa_error.h>
 
 #include "notification.h"
 #include "util.h"
