@@ -36,15 +36,12 @@ void init_serial(void)
 {
 	TEST_FD();
 
-	ulog("TEST_FD ejra :)");
-
 	struct termios old_tio, tio;
 
 	/* ** Set serial port tio ** */
 
 	/* Backup port settings */
 	tcgetattr(fd, &old_tio);
-	ulog("TEST_FD tcgetattr:)");
 	tcflush(fd, TCIOFLUSH);
 
 	memset(&tio, 0, sizeof(tio));
@@ -52,7 +49,6 @@ void init_serial(void)
 	cfsetspeed(&tio, B9600);
 
 	tcsetattr(fd, TCSAFLUSH, &tio);
-	ulog("TEST_FD tcsetattr:)");
 	tcflush(fd, TCIOFLUSH);
 }
 
