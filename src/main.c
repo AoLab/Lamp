@@ -29,7 +29,7 @@ static kaa_client_t *kaa_client;
 
 int main(int argc, char *argv[])
 {
-	open_serial("/dev/ttyUSB0");
+	open_serial("/dev/tnt0");
 
 	init_serial();
 
