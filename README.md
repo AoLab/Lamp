@@ -16,6 +16,19 @@ This project is intended to create an Internet of Things for Amirkabir Universit
 * This guide is useful for connecting your application to KAA server: [Your first KAA application](https://docs.kaaproject.org/display/KAA/Your+first+Kaa+application)
 * You need this for emulating serial port: [Null modem emulator](https://github.com/freemed/tty0tty)
 
+## Some points about Kaa 0.8.1
+### How to change IP address configuration
+You can change listening IP address of Kaa Node service with:
+```shell
+sudo sed -i 's/transport_bind_interface=.*/transport_bind_interface={IP ADDRESS}/' /etc/kaa-node/conf/kaa-node.properties
+sudo service kaa-node restart
+```
+And you can change embedding IP address of Kaa Node service in auto generated SDK with:
+```shell
+sudo sed -i 's/transport_public_interface=.*/transport_public_interface={IP ADDRESS}/' /etc/kaa-node/conf/kaa-node.properties
+sudo service kaa-node restart
+```
+
 ## Contributors
 * [Prof. Bahador Bakhshi](http://ceit.aut.ac.ir/~bakhshis/)
 * [Parham Alvani](http://1995parham.github.io/)
