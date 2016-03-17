@@ -17,7 +17,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %----------------------------------------------------------------------------------------
-%saPACKAGES AND DOCUMENT CONFIGURATIONS
+% PACKAGES AND DOCUMENT CONFIGURATIONS
 %----------------------------------------------------------------------------------------
 
 \documentclass{article}
@@ -31,41 +31,43 @@
 %\usepackage{times} % Uncomment to use the Times New Roman font
 
 %----------------------------------------------------------------------------------------
-%fontDOCUMENT INFORMATION
+% DOCUMENT INFORMATION
 %----------------------------------------------------------------------------------------
-
-\title{In the name of God \\ IoT Lab \\ Spring 2016} % Title
-
-\author{Parham \textsc{Alvani} \\ Iman \textsc{Tabrizian}} % Author name
-
-\date{\today} % Date for the report
 
 \begin{document}
 
-\maketitle % Insert the title, author and date
-
-\begin{center}
-\begin{tabular}{l r}
-    Date Performed: & Esfand 24, 2016 \\ % Date the experiment was performed
-\end{tabular}
-\end{center}
-
-% If you wish to include an abstract, uncomment the lines below
-% \begin{abstract}
-% Abstract text
-% \end{abstract}
+\begin{titlepage}
+	\centering
+	\begin{tabular}{l r}
+		\includegraphics[width=0.3\textwidth]{../AUT-CEIT-01.png}
+		&
+		\includegraphics[width=0.3\textwidth]{../AUT-CEIT-02.png}
+	\end{tabular}
+	\vspace{1cm}\par
+	{\scshape\LARGE Amirkabir University of Technology \par}
+	\vspace{1cm}
+	{\scshape\Large IoT Project Report\par}
+	\vspace{2cm}
+	{\Large\itshape Parham Alvani\par}
+	{\Large\itshape Iman Tabrizian\par}
+	\vfill
+	supervised by\par
+	Dr.Bahador \textsc{Bakhshi}\par
+    	Date Performed: Esfand 24, 1394
+	\vfill
+	{\large \today\par}
+\end{titlepage}
 
 %----------------------------------------------------------------------------------------
-%abstractSECTION 1
+% REPORT SECTION
 %----------------------------------------------------------------------------------------
 
-\section{Report}
+\section*{Report}
 In this date we successfuly sent a notification from the KAA server to the
 device files (because lamp kits wasn't there (!)) and the bug that faced last week
 thursday was fixed. The problem was that the notification was NOT added to the
 notification topics list and the notification wasn't mandatory which caused these
 problems.
-
 
 \end{document}
 
