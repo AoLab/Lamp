@@ -1,0 +1,13 @@
+{
+  "type" : "record",
+  "name" : "lamp",
+  "namespace" : "ir.ac.aut.ceit.aolab.lamp",
+  "fields" : [ {
+    "name" : "interval",
+    "type" : "int",
+    "displayName" : "Interval",
+    "displayPrompt" : "Interval",
+    "by_default" : 10
+  } ],
+  "displayName" : "Lamp Notification"
+}
