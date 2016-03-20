@@ -32,6 +32,16 @@ static void on_OnI_event_callback(SoupServer *server,
 		soup_message_set_status(msg, SOUP_STATUS_NOT_FOUND);	
 		return;
 	}
+	
+	/*
+	 * We have OnI function with GET method ONLY :)
+	 * so you get NOT IMPLEMENTED error with use other method
+	 * on it.
+	*/
+	if (msg->method != SOUP_METHOD_GET) {
+		soup_message_set_status(msg, SOUP_STATUS_NOT_IMPLEMENTED);
+		return;
+	}
 }
 
 void route_init(SoupServer *server)
