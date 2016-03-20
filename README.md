@@ -5,8 +5,8 @@ This project is intended to create an Internet of Things for Amirkabir Universit
 ![Lamp Project Architecture](http://www.googledrive.com/host/0B33KzMHyLoH2eVNHWFJZdmthOVk/Lamp-Architecture.jpg)
 
 ## How we did this awesome project :D
-1. main.c contains source code for simple turn on and off of the lamp.
-2. Using KAA for turning the light on
+1. [main.c](Lamp-RPi/src/main.c) contains source code for simple turn on and off of the lamp.
+2. Using KAA notification for turning the light on
   1. Created lamp application in the KAA server.
   2. Created **mandatory** notification topic for our lamp.
   3. Registered our notification topic in the endpoint groups.
@@ -28,6 +28,11 @@ And you can change embedding IP address of Kaa Node service in auto generated SD
 sudo sed -i 's/transport_public_interface=.*/transport_public_interface={IP ADDRESS}/' /etc/kaa-node/conf/kaa-node.properties
 sudo service kaa-node restart
 ```
+
+## Lamp-REST API
+| Function Name |     URL      | Method |              Description               |
+|:------------- |:------------:|:------:|:-------------------------------------- |
+|      OnI      |  `/Lamp/OnI` |   GET  | Turn on the lamp for specific interval |
 
 ## Contributors
 * [Prof. Bahador Bakhshi](http://ceit.aut.ac.ir/~bakhshis/)
