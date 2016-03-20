@@ -16,7 +16,7 @@
 
 #include "route.h"
 
-static void on_on_event_callback(SoupServer *server,
+static void on_OnI_event_callback(SoupServer *server,
 		SoupMessage *msg,
 		const char *path,
 		GHashTable *query,
@@ -27,5 +27,5 @@ static void on_on_event_callback(SoupServer *server,
 
 void route_init(SoupServer *server)
 {
-	soup_server_add_handler(server, "/Lamp/on", on_on_event_callback, NULL, NULL);
+	soup_server_add_handler(server, "/Lamp/OnI", on_OnI_event_callback, NULL, NULL);
 }
