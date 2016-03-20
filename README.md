@@ -40,6 +40,7 @@ Method
 
 URL params
 :
+
 | Parameter |   Value  |              Description               |
 |:---------:|:--------:|:-------------------------------------- |
 |  Interval |  integer | Duration the lamp is turned on         |
