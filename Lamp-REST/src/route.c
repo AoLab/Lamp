@@ -23,6 +23,15 @@ static void on_OnI_event_callback(SoupServer *server,
 		SoupClientContext *client,
 		gpointer user_data)
 {
+	/*
+	 * You must enter the URL currectly we do not
+	 * handle /Lamp/OnI/foo or ... in this function.
+	 * We response to invalid URLs with NOT FOUND.
+	*/
+	if (g_strcmp0(path, "/Lamp/OnI")) {
+		soup_message_set_status(msg, SOUP_STATUS_NOT_FOUND);	
+		return;
+	}
 }
 
 void route_init(SoupServer *server)
