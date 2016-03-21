@@ -14,6 +14,6 @@
 #ifndef SERVER_H
 #define SERVER_H
 
-void server_init();
+void server_init(SoupServer **server);
 
 #endif
