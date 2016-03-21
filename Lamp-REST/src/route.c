@@ -29,10 +29,10 @@ static void on_OnI_event_callback(SoupServer *server,
 	 * We response to invalid URLs with NOT FOUND.
 	*/
 	if (g_strcmp0(path, "/Lamp/OnI")) {
-		soup_message_set_status(msg, SOUP_STATUS_NOT_FOUND);	
+		soup_message_set_status(msg, SOUP_STATUS_NOT_FOUND);
 		return;
 	}
-	
+
 	/*
 	 * We have OnI function with GET method ONLY :)
 	 * so you get NOT IMPLEMENTED error with use other method
@@ -46,5 +46,6 @@ static void on_OnI_event_callback(SoupServer *server,
 
 void route_init(SoupServer *server)
 {
-	soup_server_add_handler(server, "/Lamp/OnI", on_OnI_event_callback, NULL, NULL);
+	soup_server_add_handler(server, "/Lamp/OnI",
+			on_OnI_event_callback, NULL, NULL);
 }
