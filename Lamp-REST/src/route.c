@@ -23,6 +23,8 @@ static void on_OnI_event_callback(SoupServer *server,
 		SoupClientContext *client,
 		gpointer user_data)
 {
+	g_message("Start handling request for %s", path);
+
 	/*
 	 * You must enter the URL currectly we do not
 	 * handle /Lamp/OnI/foo or ... in this function.
@@ -30,6 +32,7 @@ static void on_OnI_event_callback(SoupServer *server,
 	*/
 	if (g_strcmp0(path, "/Lamp/OnI")) {
 		soup_message_set_status(msg, SOUP_STATUS_NOT_FOUND);
+		g_message("Invalid path: %s instead of /Lamp/OnI", path);
 		return;
 	}
 
@@ -40,14 +43,29 @@ static void on_OnI_event_callback(SoupServer *server,
 	*/
 	if (msg->method != SOUP_METHOD_GET) {
 		soup_message_set_status(msg, SOUP_STATUS_NOT_IMPLEMENTED);
+		g_message("Invalid method: %s instead of GET", msg->method);
 		return;
 	}
-	
+
 	soup_message_set_status(msg, SOUP_STATUS_OK);
 }
+
+static void default_event_callback(SoupServer *server,
+		SoupMessage *msg,
+		const char *path,
+		GHashTable *query,
+		SoupClientContext *client,
+		gpointer user_data)
+{
+	g_message("404 NotFound: %s", path);
+	soup_message_set_status(msg, SOUP_STATUS_NOT_FOUND);
+}
+
 
 void route_init(SoupServer *server)
 {
 	soup_server_add_handler(server, "/Lamp/OnI",
 			on_OnI_event_callback, NULL, NULL);
+	soup_server_add_handler(server, NULL,
+			default_event_callback, NULL, NULL);
 }
