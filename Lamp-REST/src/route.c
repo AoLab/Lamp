@@ -42,6 +42,8 @@ static void on_OnI_event_callback(SoupServer *server,
 		soup_message_set_status(msg, SOUP_STATUS_NOT_IMPLEMENTED);
 		return;
 	}
+	
+	soup_message_set_status(msg, SOUP_STATUS_OK);
 }
 
 void route_init(SoupServer *server)
