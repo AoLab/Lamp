@@ -6,7 +6,9 @@
 #
 # [] Created By : Parham Alvani (parham.alvani@gmail.com)
 # =======================================
-add_executable(Lamp-REST.out main.c)
+add_executable(Lamp-REST.out main.c
+	server.h server.c
+	route.h route.c)
 
 find_package(PkgConfig)
 pkg_check_modules(LIBSOUP REQUIRED libsoup-2.4)
@@ -15,7 +17,7 @@ link_directories(${LIBSOUP_LIBRARY_DIRS})
 target_link_libraries (Lamp-REST.out ${LIBSOUP_LIBRARIES})
 
 #include_directories("${Lamp-REST_SOURCE_DIR}/libs/src")
-t#arget_link_libraries(Lamp-REST.out kaac crypto)
+#target_link_libraries(Lamp-REST.out kaac crypto)
 
 include_directories("${PROJECT_BINARY_DIR}")
 
