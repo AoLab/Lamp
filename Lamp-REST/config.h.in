@@ -1,0 +1,2 @@
+#define Lamp_REST_MAJ_VER @Lamp-REST_MAJOR_VERSION@
+#define Lamp_REST_MIN_VER @Lamp-REST_MINOR_VERSION@

@@ -17,6 +17,8 @@ target_link_libraries (Lamp-REST.out ${LIBSOUP_LIBRARIES})
 include_directories("${Lamp-REST_SOURCE_DIR}/libs/src")
 target_link_libraries(Lamp-REST.out kaac crypto)
 
+include_directories("${PROJECT_BINARY_DIR}")
+
 # Add personal c flags
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -O0 -g -std=gnu11 ")
 set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS} -DDEBUG")

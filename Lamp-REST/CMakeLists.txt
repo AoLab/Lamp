@@ -17,3 +17,13 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/bin")
 
 add_subdirectory(libs)
 add_subdirectory(src)
+
+# The version number
+set(Lamp-REST_MAJOR_VERSION 0)
+set(Lamp-REST_MINOR_VERSION 5)
+
+# Configuration header file
+configure_file(
+	"${PROJECT_SOURCE_DIR}/config.h.in"
+	"${PROJECT_BINARY_DIR}/config.h"
+)
