@@ -14,8 +14,8 @@ include_directories(${LIBSOUP_INCLUDE_DIRS})
 link_directories(${LIBSOUP_LIBRARY_DIRS})
 target_link_libraries (Lamp-REST.out ${LIBSOUP_LIBRARIES})
 
-include_directories("${Lamp-REST_SOURCE_DIR}/libs/src")
-target_link_libraries(Lamp-REST.out kaac crypto)
+#include_directories("${Lamp-REST_SOURCE_DIR}/libs/src")
+t#arget_link_libraries(Lamp-REST.out kaac crypto)
 
 include_directories("${PROJECT_BINARY_DIR}")
 

@@ -15,7 +15,7 @@ find_package(OpenSSL REQUIRED)
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=gnu99 -g -Wall")
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/bin")
 
-add_subdirectory(libs)
+#add_subdirectory(libs)
 add_subdirectory(src)
 
 # The version number
