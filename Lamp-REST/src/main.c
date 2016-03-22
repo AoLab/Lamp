@@ -21,16 +21,24 @@
 
 int main(int argc, char *argv[])
 {
-	SoupServer *server;
-	GMainLoop *loop;
+	/* Kaa */
 
-	server_init(&server);
-	route_init(server);
+	GThread *kaa;
+	
+	kaa = g_thread_new("Kaa");
+
+	/* REST */
+	
+	SoupServer *server;
+	GMainLoop *rest_loop;
+
+	rest_server_init(&server);
+	rest_route_init(server);
 
 	/* Create main event loop */
-	loop = g_main_loop_new(NULL, true);
-	g_main_loop_run(loop);
-	g_main_loop_unref(loop);
+	rest_loop = g_main_loop_new(NULL, true);
+	g_main_loop_run(rest_loop);
+	g_main_loop_unref(rest_loop);
 
 	return 0;
 }
