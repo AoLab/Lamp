@@ -62,7 +62,7 @@ static void default_event_callback(SoupServer *server,
 }
 
 
-void route_init(SoupServer *server)
+void rest_route_init(SoupServer *server)
 {
 	soup_server_add_handler(server, "/Lamp/OnI",
 			on_OnI_event_callback, NULL, NULL);

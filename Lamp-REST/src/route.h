@@ -15,6 +15,6 @@
 #ifndef ROUTE_H
 #define ROUTE_H
 
-void route_init(SoupServer *server);
+void rest_route_init(SoupServer *server);
 
 #endif
