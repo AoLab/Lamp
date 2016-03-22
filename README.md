@@ -43,10 +43,22 @@ URL params
 
 | Parameter |   Value  |              Description               |
 |:---------:|:--------:|:-------------------------------------- |
-|  Interval |  integer | Duration the lamp is turned on         |
+|  interval |  integer | Duration the lamp is turned on         |
 
 Data params
 : None
+
+Success response:
+: Code: 200
+
+Error response:
+:
+
+|   Status codes       |              Description               |
+|:--------------------:|:-------------------------------------- |
+|  400 Bad Request     | The specified parameters are not valid |
+|  404 Not Found       | The specified path was not found       |
+|  501 Not Implemented | The specified method was not valid     |
 
 ## Contributors
 * [Prof. Bahador Bakhshi](http://ceit.aut.ac.ir/~bakhshis/)
