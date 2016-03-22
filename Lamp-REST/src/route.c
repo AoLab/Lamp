@@ -47,6 +47,7 @@ static void on_OnI_event_callback(SoupServer *server,
 		return;
 	}
 
+	g_message("Request Interval: %s", (const char *)g_hash_table_lookup(query, "interval"));
 	soup_message_set_status(msg, SOUP_STATUS_OK);
 }
 
