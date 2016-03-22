@@ -20,6 +20,7 @@
 #include "route.h"
 
 static gpointer kaa_thread(gpointer data) {
+	return NULL;
 }
 
 int main(int argc, char *argv[])
