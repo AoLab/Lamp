@@ -32,26 +32,27 @@ sudo service kaa-node restart
 ## Lamp-REST API
 ### Turn The Lamp ON
 Trun the lamp on for specific interval
-URL
+
+- URL
 : /Lamp/OnI
 
-Method
+- Method
 : `GET`
 
-URL params
+- URL params
 :
 
 | Parameter |   Value  |              Description               |
 |:---------:|:--------:|:-------------------------------------- |
 |  interval |  integer | Duration the lamp is turned on         |
 
-Data params
+- Data params
 : None
 
-Success response:
+- Success response:
 : Code: 200
 
-Error response:
+- Error response:
 :
 
 |   Status codes       |              Description               |
