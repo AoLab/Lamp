@@ -20,7 +20,7 @@
 #include "server.h"
 #include "config.h"
 
-void server_init(SoupServer **server)
+void rest_server_init(SoupServer **server)
 {
 	GError *error = NULL;
 	char server_name[256];
