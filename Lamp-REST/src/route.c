@@ -62,7 +62,7 @@ static void on_OnI_event_callback(SoupServer *server,
 		return;
 	}
 
-	int64_t interval = g_ascii_strtoll(interval_str, NULL, 10);	
+	int64_t interval = g_ascii_strtoll(interval_str, NULL, 10);
 
 	soup_message_set_status(msg, SOUP_STATUS_OK);
 }

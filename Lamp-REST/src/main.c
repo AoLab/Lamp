@@ -19,7 +19,8 @@
 #include "server.h"
 #include "route.h"
 
-static gpointer kaa_thread(gpointer data) {
+static gpointer kaa_thread(gpointer data)
+{
 	return NULL;
 }
 
@@ -28,11 +29,11 @@ int main(int argc, char *argv[])
 	/* Kaa */
 
 	GThread *kaa;
-	
+
 	kaa = g_thread_new("Kaa", kaa_thread, NULL);
 
 	/* REST */
-	
+
 	SoupServer *server;
 	GMainLoop *rest_loop;
 

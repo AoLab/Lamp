@@ -37,7 +37,7 @@ void rest_server_init(SoupServer **server)
 	*server = soup_server_new(SOUP_SERVER_SERVER_HEADER,
 		server_name, SOUP_SERVER_PORT, 1373, NULL);
 	soup_server_run_async(*server);
-#endif	
+#endif
 	if (error) {
 		g_critical("Unable to create soup server: %s\n",
 				error->message);
