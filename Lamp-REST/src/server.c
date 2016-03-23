@@ -15,7 +15,6 @@
 #include <libsoup/soup.h>
 #include <glib.h>
 #include <glib/gprintf.h>
-#include <stdlib.h>
 
 #include "server.h"
 #include "config.h"
@@ -41,7 +40,7 @@ void rest_server_init(SoupServer **server)
 	if (error) {
 		g_critical("Unable to create soup server: %s\n",
 				error->message);
-		exit(1);
+		abort();
 	}
 	g_message("Server created successfully");
 }
