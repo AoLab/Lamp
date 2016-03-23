@@ -2,7 +2,8 @@
 ## Introduction
 First Proof of Concepts after lot of TeX generation  
 This project is intended to create an Internet of Things for Amirkabir University of Technology. This project uses [KAA](https://kaaproject.org) as the middle server.
-![Lamp Project Architecture](http://www.googledrive.com/host/0B33KzMHyLoH2eVNHWFJZdmthOVk/Lamp-Architecture.jpg)
+![Lamp Project Architecture](http://www.googledrive.com/host/0B33KzMHyLoH2eVNHWFJZdmthOVk/Lamp-Architecture-Main.jpg)
+![Lamp-REST Project Architecture](http://www.googledrive.com/host/0B33KzMHyLoH2eVNHWFJZdmthOVk/Lamp-Architecture-Lamp-REST.jpg)
 
 ## How we did this awesome project :D
 1. [main.c](Lamp-RPi/src/main.c) contains source code for simple turn on and off of the lamp.
