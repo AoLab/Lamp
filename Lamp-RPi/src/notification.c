@@ -21,7 +21,8 @@
 #include "util.h"
 #include "lamp.h"
 
-static void on_notification(void *context, uint64_t *topic_id, kaa_notification_t *notification)
+static void on_notification(void *context,
+		uint64_t *topic_id, kaa_notification_t *notification)
 {
 	int interval = notification->interval;
 

@@ -45,7 +45,8 @@ int main(int argc, char *argv[])
 	/* Build notification related things */
 
 	error_code = kaa_notification_register(
-			kaa_client_get_context(kaa_client)->notification_manager);
+			kaa_client_get_context(
+				kaa_client)->notification_manager);
 	KAA_RETURN_IF_ERROR(error_code, "Failed to register notification");
 
 	/* Build event related things */
