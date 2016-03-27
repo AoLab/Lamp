@@ -47,6 +47,12 @@ int main(int argc, char *argv[])
 			kaa_client_get_context(kaa_client)->notification_manager);
 	KAA_RETURN_IF_ERROR(error_code, "Failed to register notification");
 
+	/* Build event related things */
+	error_code = kaa_event_register(
+			kaa_client_get_context(kaa_client)->event_manager);
+	KAA_RETURN_IF_ERROR(error_code, "Failed to register event");
+
+
 	error_code = kaa_client_start(kaa_client, NULL, NULL, 0);
 	KAA_RETURN_IF_ERROR(error_code, "Failed to start Kaa main loop");
 
