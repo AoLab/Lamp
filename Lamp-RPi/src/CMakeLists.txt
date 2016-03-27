@@ -10,7 +10,8 @@ add_executable(Lamp-RPi.out main.c
 	serial.c serial.h
 	common.c common.h
 	notification.c notification.h
-	event.c event.h)
+	event.c event.h
+	lamp.c lamp.h)
 
 include_directories("${Lamp-RPi_SOURCE_DIR}/libs/src")
 target_link_libraries(Lamp-RPi.out kaac crypto)
