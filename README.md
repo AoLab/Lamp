@@ -5,6 +5,9 @@ This project is intended to create an Internet of Things for Amirkabir Universit
 ![Lamp Project Architecture](http://www.googledrive.com/host/0B33KzMHyLoH2eVNHWFJZdmthOVk/Lamp-Architecture-Main.jpg)
 ![Lamp-REST Project Architecture](http://www.googledrive.com/host/0B33KzMHyLoH2eVNHWFJZdmthOVk/Lamp-Architecture-Lamp-REST.jpg)
 
+## Java version
+You can see java version of this project named JLamp [here](https://github.com/AoLab/JLamp).
+
 ## How we did this awesome project :D
 1. [main.c](Lamp-RPi/src/main.c) contains source code for simple turn on and off of the lamp.
 2. Using KAA notification for turning the light on
