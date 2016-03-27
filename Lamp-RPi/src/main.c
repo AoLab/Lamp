@@ -22,6 +22,7 @@
 #include <kaa/utilities/kaa_log.h>
 
 #include "util.h"
+#include "event.h"
 #include "serial.h"
 #include "notification.h"
 
