@@ -20,7 +20,6 @@
 #include <kaa/platform/ext_user_callback.h>
 
 #include "user.h"
-#include "util.h"
 
 static kaa_error_t on_attached(void *context, const char *user_external_id,
 		const char *endpoint_access_token)
