@@ -20,7 +20,7 @@
 #include "route.h"
 #include "kaa.h"
 
-static gpointer kaa_thread(gpointer data)
+static gpointer kaa_thread_fn(gpointer data)
 {
 	kaa_init();
 	return NULL;
@@ -30,9 +30,9 @@ int main(int argc, char *argv[])
 {
 	/* Kaa */
 
-	GThread *kaa;
+	GThread *kaa_thread;
 
-	kaa = g_thread_new("Kaa", kaa_thread, NULL);
+	kaa_thread = g_thread_new("Kaa", kaa_thread_fn, NULL);
 
 	/* REST */
 
@@ -46,6 +46,9 @@ int main(int argc, char *argv[])
 	rest_loop = g_main_loop_new(NULL, true);
 	g_main_loop_run(rest_loop);
 	g_main_loop_unref(rest_loop);
+
+	g_thread_join(kaa_thread);
+	g_thread_unref(kaa_thread);
 
 	return 0;
 }
