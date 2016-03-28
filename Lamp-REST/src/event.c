@@ -25,6 +25,8 @@
 #include <kaa/kaa_event.h>
 #include <kaa/platform/ext_event_listeners_callback.h>
 
+#include "kaa.h"
+
 static kaa_error_t event_listeners_callback(void *context,
 		const kaa_endpoint_id listeners[], size_t listeners_count)
 {
@@ -37,17 +39,17 @@ static kaa_error_t event_listeners_callback(void *context,
 
 	/* Create and send an event */
 
-	/* TODO: replace with lamp event */
-	kaa_led_event_class_family_led_on_event_t *led_on_request =
-		kaa_led_event_class_family_led_on_event_create();
+	kaa_lamp_event_family_oni_t *oni_request =
+		kaa_lamp_event_family_oni_create();
+	oni_request->interval = *interval_ptr;
 
-	error_code = kaa_event_manager_send_kaa_led_event_class_family_led_on_event(
+	error_code = kaa_event_manager_send_kaa_lamp_event_family_oni(
 			kaa_client_get_context(kaa_client)->event_manager
-			, led_on_request
+			, oni_request
 			, NULL);
-	KAA_RETURN_IF_ERROR(error_code, "Failed to send LEDOnEvent");
+	//KAA_RETURN_IF_ERROR(error_code, "Failed to send LEDOnEvent");
 
-	led_on_request->destroy(led_on_request);
+	oni_request->destroy(oni_request);
 	free(context);
 
 	return KAA_ERR_NONE;
@@ -71,7 +73,7 @@ void request_OnI_event(int64_t interval)
 	/* Find endpoint by event FQDN */
 
 	/* TODO: replace with lamp FQDN */
-	const char *fqns[] = {"ir.ac.aut.aolab.lamp"};
+	const char *fqns[] = {"ir.ac.aut.aolab.lamp.OnI"};
 
 	kaa_event_listeners_callback_t callback = {interval_ptr, event_listeners_callback, event_listeners_request_failed};
 
@@ -79,5 +81,5 @@ void request_OnI_event(int64_t interval)
 			, fqns
 			, 1
 			, &callback);
-	KAA_EXIT_IF_ERROR(error_code, "Failed to attach event listener");
+	//KAA_EXIT_IF_ERROR(error_code, "Failed to attach event listener");
 }

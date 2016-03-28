@@ -22,8 +22,9 @@
 #include <kaa/utilities/kaa_log.h>
 
 #include "user.h"
+#include "kaa.h"
 
-static kaa_client_t *kaa_client;
+kaa_client_t *kaa_client;
 
 
 void kaa_init(void)
@@ -33,7 +34,7 @@ void kaa_init(void)
 	/* Build Kaa client */
 
 	error_code = kaa_client_create(&kaa_client, NULL);
-	KAA_RETURN_IF_ERROR(error_code, "Failed create Kaa client");
+	//KAA_RETURN_IF_ERROR(error_code, "Failed create Kaa client");
 
 	/* Attach to user :) */	
 	
@@ -43,7 +44,7 @@ void kaa_init(void)
 			"");
 
 	error_code = kaa_client_start(kaa_client, NULL, NULL, 0);
-	KAA_RETURN_IF_ERROR(error_code, "Failed to start Kaa main loop");
+	//KAA_RETURN_IF_ERROR(error_code, "Failed to start Kaa main loop");
 
 	kaa_client_destroy(kaa_client);
 	return error_code;

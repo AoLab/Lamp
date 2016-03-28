@@ -18,9 +18,11 @@
 
 #include "server.h"
 #include "route.h"
+#include "kaa.h"
 
 static gpointer kaa_thread(gpointer data)
 {
+	kaa_init();
 	return NULL;
 }
 
