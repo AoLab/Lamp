@@ -20,9 +20,6 @@
 #include <kaa/kaa_error.h>
 #include <kaa/platform/kaa_client.h>
 #include <kaa/utilities/kaa_log.h>
-#include <kaa/gen/kaa_led_event_class_family.h>
-#include <kaa/kaa_event.h>
-#include <kaa/platform/ext_event_listeners_callback.h>
 
 #include "user.h"
 
@@ -38,7 +35,7 @@ void kaa_init(void)
 	error_code = kaa_client_create(&kaa_client, NULL);
 	KAA_RETURN_IF_ERROR(error_code, "Failed create Kaa client");
 
-	/* Attach to user :) */
+	/* Attach to user :) */	
 	
 	attach_endpoint_to_user(
 			kaa_client_get_context(kaa_client)->user_manager,

@@ -13,6 +13,7 @@
 */
 #include <stdint.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <time.h>
 #include <stdbool.h>
@@ -20,11 +21,9 @@
 #include <kaa/kaa_error.h>
 #include <kaa/platform/kaa_client.h>
 #include <kaa/utilities/kaa_log.h>
-#include <kaa/gen/kaa_led_event_class_family.h>
+#include <kaa/gen/kaa_lamp_event_family.h>
 #include <kaa/kaa_event.h>
 #include <kaa/platform/ext_event_listeners_callback.h>
-
-#include "util.h"
 
 static kaa_error_t event_listeners_callback(void *context,
 		const kaa_endpoint_id listeners[], size_t listeners_count)
