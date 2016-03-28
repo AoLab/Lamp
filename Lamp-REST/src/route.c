@@ -16,6 +16,7 @@
 #include <stdint.h>
 
 #include "route.h"
+#include "event.h"
 
 static void on_OnI_event_callback(SoupServer *server,
 		SoupMessage *msg,
@@ -63,6 +64,8 @@ static void on_OnI_event_callback(SoupServer *server,
 	}
 
 	int64_t interval = g_ascii_strtoll(interval_str, NULL, 10);
+
+	request_OnI_event(interval);
 
 	soup_message_set_status(msg, SOUP_STATUS_OK);
 }
