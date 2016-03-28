@@ -72,7 +72,6 @@ void request_OnI_event(int64_t interval)
 
 	/* Find endpoint by event FQDN */
 
-	/* TODO: replace with lamp FQDN */
 	const char *fqns[] = {"ir.ac.aut.aolab.lamp.OnI"};
 
 	kaa_event_listeners_callback_t callback = {interval_ptr, event_listeners_callback, event_listeners_request_failed};
