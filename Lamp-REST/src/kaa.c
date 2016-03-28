@@ -11,11 +11,9 @@
 /*
  * Copyright (c) 2016 Parham Alvani.
 */
+#include <glib.h>
 #include <stdint.h>
-#include <stdio.h>
-#include <string.h>
-#include <time.h>
-#include <stdbool.h>
+#include <stdlib.h>
 
 #include <kaa/kaa_error.h>
 #include <kaa/platform/kaa_client.h>
@@ -34,7 +32,10 @@ void kaa_init(void)
 	/* Build Kaa client */
 
 	error_code = kaa_client_create(&kaa_client, NULL);
-	//KAA_RETURN_IF_ERROR(error_code, "Failed create Kaa client");
+	if (error_code) {
+		g_critical("Failed to create Kaa client");
+		abort();
+	}
 
 	/* Attach to user :) */	
 	
@@ -44,8 +45,10 @@ void kaa_init(void)
 			"");
 
 	error_code = kaa_client_start(kaa_client, NULL, NULL, 0);
-	//KAA_RETURN_IF_ERROR(error_code, "Failed to start Kaa main loop");
+	if (error_code) {
+		g_critical("Failed to start Kaa main loop");
+		abort();
+	}
 
 	kaa_client_destroy(kaa_client);
-	return error_code;
 }
