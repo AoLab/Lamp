@@ -8,7 +8,10 @@
 # =======================================
 add_executable(Lamp-REST.out main.c
 	server.h server.c
-	route.h route.c)
+	route.h route.c
+	kaa.h kaa.c
+	event.h event.c
+	user.h user.c)
 
 find_package(PkgConfig)
 pkg_check_modules(LIBSOUP REQUIRED libsoup-2.4)
@@ -16,8 +19,8 @@ include_directories(${LIBSOUP_INCLUDE_DIRS})
 link_directories(${LIBSOUP_LIBRARY_DIRS})
 target_link_libraries (Lamp-REST.out ${LIBSOUP_LIBRARIES})
 
-#include_directories("${Lamp-REST_SOURCE_DIR}/libs/src")
-#target_link_libraries(Lamp-REST.out kaac crypto)
+include_directories("${Lamp-REST_SOURCE_DIR}/libs/src")
+target_link_libraries(Lamp-REST.out kaac crypto)
 
 include_directories("${PROJECT_BINARY_DIR}")
 
