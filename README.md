@@ -1,3 +1,4 @@
+![Lamp Project Logo](http://www.googledrive.com/host/0B33KzMHyLoH2eVNHWFJZdmthOVk/Lamp-Logo.png)
 # Lamp
 ## Introduction
 First Proof of Concepts after lot of TeX generation  
