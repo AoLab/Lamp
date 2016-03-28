@@ -15,6 +15,7 @@
 #include <libsoup/soup.h>
 #include <glib.h>
 #include <glib/gprintf.h>
+#include <stdlib.h>
 
 #include "server.h"
 #include "config.h"
