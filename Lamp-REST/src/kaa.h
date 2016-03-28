@@ -20,6 +20,6 @@
 
 extern kaa_client_t *kaa_client;
 
-void kaa_init(void);
+void kaa_start(void);
 
 #endif

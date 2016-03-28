@@ -22,11 +22,11 @@
 #include "user.h"
 #include "kaa.h"
 
-kaa_client_t *kaa_client;
+kaa_client_t *kaa_client = NULL;
 
-
-void kaa_init(void)
+void kaa_start(void)
 {
+	g_message("Kaa client initiation started.");
 	kaa_error_t error_code;
 	
 	/* Build Kaa client */

@@ -22,7 +22,7 @@
 
 static gpointer kaa_thread_fn(gpointer data)
 {
-	kaa_init();
+	kaa_start();
 	return NULL;
 }
 
