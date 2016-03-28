@@ -36,6 +36,7 @@ void kaa_init(void)
 		g_critical("Failed to create Kaa client");
 		abort();
 	}
+	g_message("Kaa client created susuccessfully");
 
 	/* Attach to user :) */	
 	
@@ -44,11 +45,14 @@ void kaa_init(void)
 			"Parham",
 			"");
 
+	/* Start Kaa client */
+
 	error_code = kaa_client_start(kaa_client, NULL, NULL, 0);
 	if (error_code) {
 		g_critical("Failed to start Kaa main loop");
 		abort();
 	}
+	g_message("Kaa client started susuccessfully");
 
 	kaa_client_destroy(kaa_client);
 }
