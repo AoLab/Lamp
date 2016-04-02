@@ -1,0 +1,26 @@
+{
+  "type" : "record",
+  "name" : "location_info_schema",
+  "namespace" : "ir.ac.aut.ceit.aolab.lamp",
+  "fields" : [ {
+    "name" : "room_number",
+    "type" : "int",
+    "displayName" : "Room Number",
+    "displayPrompt" : "",
+    "by_default" : 0
+  }, {
+    "name" : "room_owner",
+    "type" : {
+      "type" : "string",
+      "avro.java.string" : "String"
+    },
+    "displayName" : "Room Owner",
+    "displayPrompt" : "",
+    "by_default" : "Parham Alvani",
+    "maxLength" : 1024,
+    "inputType" : "plain"
+  } ],
+  "version" : 1,
+  "dependencies" : [ ],
+  "displayName" : "Location Info Schema"
+}
