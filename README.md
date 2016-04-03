@@ -6,6 +6,11 @@ This project is intended to create an Internet of Things for Amirkabir Universit
 ![Lamp Project Architecture](http://www.googledrive.com/host/0B33KzMHyLoH2eVNHWFJZdmthOVk/Lamp-Architecture-Main.jpg)
 ![Lamp-REST Project Architecture](http://www.googledrive.com/host/0B33KzMHyLoH2eVNHWFJZdmthOVk/Lamp-Architecture-Lamp-REST.jpg)
 
+## Device Identification and Discovery
+We use Kaa Endpoint Profile for device identification and discovery.
+Devices find by Location Info Schema, in this schema we store infomations
+about device room number and room owner.
+
 ## Java version
 You can see java version of this project named JLamp [here](https://github.com/AoLab/JLamp).
 
