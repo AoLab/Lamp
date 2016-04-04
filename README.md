@@ -14,6 +14,10 @@ about device room number and room owner.
 ## Java version
 You can see java version of this project named JLamp [here](https://github.com/AoLab/JLamp).
 
+## Project Timeline
+![Lamp Project Timeline](http://www.googledrive.com/host/0B33KzMHyLoH2eVNHWFJZdmthOVk/Lamp-Gantt-Chart.jpg)
+
+
 ## How we did this awesome project :D
 1. [main.c](Lamp-RPi/src/main.c) contains source code for simple turn on and off of the lamp.
 2. Using KAA notification for turning the light on
