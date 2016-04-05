@@ -15,6 +15,6 @@
 #ifndef PROFILE_H
 #define PROFILE_H
 
-void kaa_profile_register(kaa_profile_manager_t *manager);
+kaa_error_t kaa_profile_register(kaa_profile_manager_t *manager);
 
 #endif
