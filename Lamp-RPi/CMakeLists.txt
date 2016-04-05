@@ -16,7 +16,7 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=gnu99 -g -Wall")
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/bin")
 
 set(LAMP_ROOM_NUMBER 203)
-set(LAMP_ROOM_OWNER "Parham Alvani")
+set(LAMP_ROOM_OWNER "\"Parham Alvani\"")
 
 # Configuration header file
 configure_file(
