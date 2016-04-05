@@ -26,6 +26,7 @@
 #include "serial.h"
 #include "notification.h"
 #include "user.h"
+#include "profile.h"
 
 static kaa_client_t *kaa_client;
 
@@ -51,6 +52,7 @@ int main(int argc, char *argv[])
 	KAA_RETURN_IF_ERROR(error_code, "Failed to register notification");
 
 	/* Build event related things */
+	
 	error_code = kaa_event_register(
 			kaa_client_get_context(kaa_client)->event_manager);
 	KAA_RETURN_IF_ERROR(error_code, "Failed to register event");
@@ -61,6 +63,11 @@ int main(int argc, char *argv[])
 			kaa_client_get_context(kaa_client)->user_manager,
 			"Parham",
 			"");
+
+	/* Register our location */
+	
+	kaa_profile_register(
+			kaa_client_get_context(kaa_client)->profile_manager);
 
 	error_code = kaa_client_start(kaa_client, NULL, NULL, 0);
 	KAA_RETURN_IF_ERROR(error_code, "Failed to start Kaa main loop");
