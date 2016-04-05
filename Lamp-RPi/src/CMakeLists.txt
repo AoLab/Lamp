@@ -14,6 +14,7 @@ add_executable(Lamp-RPi.out main.c
 	lamp.c lamp.h
 	user.c user.h)
 
+include_directories("${PROJECT_BINARY_DIR}")
 include_directories("${Lamp-RPi_SOURCE_DIR}/libs/src")
 target_link_libraries(Lamp-RPi.out kaac crypto)
 
