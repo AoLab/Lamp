@@ -18,6 +18,7 @@
 #include <stdbool.h>
 
 #include <kaa/kaa_error.h>
+#include <kaa/kaa_status.h>
 #include <kaa/platform/kaa_client.h>
 #include <kaa/utilities/kaa_log.h>
 
@@ -68,6 +69,12 @@ int main(int argc, char *argv[])
 	
 	kaa_profile_register(
 			kaa_client_get_context(kaa_client)->profile_manager);
+
+	int i;
+	kaa_digest_p hash = ((kaa_status_t *)(kaa_client_get_context(kaa_client)->status))->endpoint_public_key_hash;
+	for (i = 0; i < sizeof(kaa_digest); i++)
+		printf("%u ", hash[i]);
+	printf("\n");
 
 	error_code = kaa_client_start(kaa_client, NULL, NULL, 0);
 	KAA_RETURN_IF_ERROR(error_code, "Failed to start Kaa main loop");
