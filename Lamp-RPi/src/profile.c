@@ -25,6 +25,8 @@ kaa_error_t kaa_profile_register(kaa_profile_manager_t *manager)
 {
 	kaa_error_t error_code;
 	kaa_profile_t *profile;
+	kaa_endpoint_id id;
+	int i;
 
 	/* Create and update profile */
 	profile = kaa_profile_location_info_schema_create();
@@ -35,8 +37,14 @@ kaa_error_t kaa_profile_register(kaa_profile_manager_t *manager)
 	error_code = kaa_profile_manager_update_profile(manager, profile);
 	KAA_RETURN_IF_ERROR(error_code, "Failed to register profile");
 
-
 	profile->destroy(profile);
+	
+	error_code = kaa_profile_manager_get_endpoint_id(manager, id);
+	KAA_RETURN_IF_ERROR(error_code, "Failed to register profile");
+	for (i = 0; i < sizeof(kaa_endpoint_id); i++)
+		printf("%x ", id[i]);
+	printf("\n");
+
 
 	return error_code;
 }
