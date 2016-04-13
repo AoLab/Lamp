@@ -30,6 +30,7 @@ You can see java version of this project named JLamp [here](https://github.com/A
 * This guide is useful for connecting your application to KAA server: [Your first KAA application](https://docs.kaaproject.org/display/KAA/Your+first+Kaa+application)
 * You need this for emulating serial port: [Null modem emulator](https://github.com/freemed/tty0tty)
 * Checkout screen cheatsheet: [Screen cheatsheet](http://aperiodic.net/screen/quick_reference)
+* For installing Lamp-RPi on RPi (!) see [this](https://developer.ubuntu.com/en/snappy/start/raspberry-pi-2/)
 
 ## Some points about Kaa 0.8.1
 ### How to change IP address configuration
