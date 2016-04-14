@@ -33,6 +33,13 @@ static kaa_error_t event_listeners_callback(void *context,
 	printf("Event Listerners: %zd\n", listeners_count);
 
 	kaa_error_t error_code;
+	int i, j;
+
+	for (i = 0; i < listeners_count; i++) {
+		for (j = 0; j < sizeof(kaa_endpoint_id); j++) {
+			printf("%c ", listeners[i][j]);
+		}
+	}
 
 	/* Restore interval parameter */
 	int64_t *interval_ptr = context;
@@ -81,4 +88,7 @@ void request_OnI_event(int64_t interval)
 			, 1
 			, &callback);
 	//KAA_EXIT_IF_ERROR(error_code, "Failed to attach event listener");
+}
+
+void request_List_event(void) {
 }
