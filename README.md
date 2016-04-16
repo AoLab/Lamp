@@ -79,6 +79,37 @@ Trun the lamp on for specific interval
 |  404 Not Found       | The specified path was not found       |
 |  501 Not Implemented | The specified method was not valid     |
 
+### List The Lamps :)
+Return list of the avaible sink of lamps event.
+
+- URL
+: /Lamp/List
+
+- Method
+: `GET`
+
+- URL params
+: None
+
+- Data params
+: None
+
+- Success response:
+: Code: 200
+: Body:
+```json
+[{"id":"19 1b 9e e8 6e db f9 a2 9f cc 5e 32 74 ac f0 f6 5c 84 8b cd "}]
+```
+
+- Error response:
+:
+
+|   Status codes       |              Description               |
+|:--------------------:|:-------------------------------------- |
+|  400 Bad Request     | The specified parameters are not valid |
+|  404 Not Found       | The specified path was not found       |
+|  501 Not Implemented | The specified method was not valid     |
+
 ## Contributors
 * [Prof. Bahador Bakhshi](http://ceit.aut.ac.ir/~bakhshis/)
 * [Parham Alvani](http://1995parham.github.io/)
