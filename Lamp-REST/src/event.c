@@ -42,6 +42,9 @@ static kaa_error_t event_listeners_callback(void *context,
 		printf("\n");
 	}
 
+	kaa_endpoint_id **ids = context;
+	*ids = listeners;
+
 	return KAA_ERR_NONE;
 }
 
@@ -88,14 +91,14 @@ void request_OnI_event_id(int64_t interval, kaa_endpoint_id id)
 	oni_request->destroy(oni_request);
 }
 
-void request_List_event(void) {
+void request_List_event(kaa_endpoint_id **ids, size_t *ids_length) {
 	kaa_error_t error_code;
 
 	/* Try to find event sinks by FQDN :) */
 
 	const char *fqns[] = {"ir.ac.aut.ceit.aolab.lamp.OnI"};
 
-	kaa_event_listeners_callback_t callback = {NULL, event_listeners_callback, event_listeners_request_failed};
+	kaa_event_listeners_callback_t callback = {ids, event_listeners_callback, event_listeners_request_failed};
 
 	error_code = kaa_event_manager_find_event_listeners(kaa_client_get_context(kaa_client)->event_manager
 			, fqns

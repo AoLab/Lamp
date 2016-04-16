@@ -104,13 +104,17 @@ static void on_List_event_callback(SoupServer *server,
 		return;
 	}
 
-	kaa_endpoint_id *ids;
+	kaa_endpoint_id *ids = NULL;
+	size_t ids_length;
 
-	request_List_event();
+	request_List_event(&ids, &ids_length);
 
 	/*
 	 * Wait until our data collected from server :)
 	*/
+	while (!ids);
+
+	printf("%p\n", ids);
 
 	JsonGenerator *jgen;
 	gchar *jdata;
