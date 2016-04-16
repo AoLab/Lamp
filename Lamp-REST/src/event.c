@@ -30,7 +30,7 @@
 struct kaa_endpoint_ids_context {
 	kaa_endpoint_id **ids;
 	size_t *ids_length;
-}
+};
 
 static kaa_error_t event_listeners_callback(void *context,
 		const kaa_endpoint_id listeners[], size_t listeners_count)
@@ -40,7 +40,7 @@ static kaa_error_t event_listeners_callback(void *context,
 	kaa_error_t error_code;
 	int i, j;
 
-	struct kaa_endpoint_ids_context c = context;
+	struct kaa_endpoint_ids_context *c = context;
 	kaa_endpoint_id **ids = c->ids;
 	*ids = malloc(sizeof(kaa_endpoint_id) * sizeof(uint8_t) * listeners_count);
 	*(c->ids_length) = listeners_count;
@@ -107,7 +107,7 @@ void request_List_event(kaa_endpoint_id **ids, size_t *ids_length) {
 
 	const char *fqns[] = {"ir.ac.aut.ceit.aolab.lamp.OnI"};
 
-	struct kaa_endpoint_ids_context *c = malloc(sizeof(kaa_endpoint_ids_context));
+	struct kaa_endpoint_ids_context *c = malloc(sizeof(struct kaa_endpoint_ids_context));
 	c->ids = ids;
 	c->ids_length = ids_length;
 	kaa_event_listeners_callback_t callback = {c, event_listeners_callback, event_listeners_request_failed};
