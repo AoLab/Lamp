@@ -119,8 +119,33 @@ static void on_List_event_callback(SoupServer *server,
 	JsonGenerator *jgen;
 	gchar *jdata;
 	gsize jsize;
+	int i, j;
+
+	JsonNode *root = json_node_alloc();
+	JsonArray *lamps_array = json_array_sized_new(ids_length);
+	for (i = 0; i < ids_length; i++) {
+		/* Get and Set lamp ids :) */
+		JsonNode *id_node = json_node_alloc();
+		char id_str[sizeof(kaa_endpoint_id) * 3];
+		
+		for (j = 0; j < sizeof(kaa_endpoint_id); j++) {
+			printf("%02hx ", ids[i][j]);
+			sprintf(id_str + 3 * j, "%02hx ", ids[i][j]);
+		}
+		printf("\n");
+
+		id_node = json_node_init_string(id_node, id_str);
+		
+		JsonObject *lamp_object = json_object_new();
+		json_object_set_member(lamp_object, "id", id_node);
+		JsonNode *lamp_node = json_node_alloc();
+		lamp_node = json_node_init_object(lamp_node, lamp_object);
+		json_array_add_element(lamps_array, lamp_node);
+	}
+	root = json_node_init_array(root, lamps_array);
 
 	jgen = json_generator_new();
+	json_generator_set_root(jgen, root);
 	jdata = json_generator_to_data(jgen, &jsize);
 	if (jsize == 0) {
 		soup_message_set_status(msg, SOUP_STATUS_INTERNAL_SERVER_ERROR);
