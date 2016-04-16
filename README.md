@@ -98,9 +98,9 @@ Return list of the avaible sink of lamps event.
 :
     - Code: 200
     - Body:
-```json
+    ```json
 [{"id":"19 1b 9e e8 6e db f9 a2 9f cc 5e 32 74 ac f0 f6 5c 84 8b cd "}]
-```
+    ```
 
 - Error response
 :
