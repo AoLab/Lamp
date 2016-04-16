@@ -17,6 +17,11 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/bin")
 
 set(LAMP_ROOM_NUMBER 203)
 set(LAMP_ROOM_OWNER "\"Parham Alvani\"")
+set(LAMP_SERIAL_PATH "\"/dev/tnt0\"")
+
+message("LAMP_ROOM_NUMBER: ${LAMP_ROOM_NUMBER}")
+message("LAMP_ROOM_OWNER: ${LAMP_ROOM_OWNER}")
+message("LAMP_SERIAL_PATH: ${LAMP_SERIAL_PATH}")
 
 # Configuration header file
 configure_file(
