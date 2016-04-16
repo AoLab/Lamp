@@ -13,6 +13,7 @@
 */
 
 #include <libsoup/soup.h>
+#include <json-glib/json-glib.h>
 #include <stdint.h>
 
 #include <kaa/kaa_common.h>
@@ -103,9 +104,27 @@ static void on_List_event_callback(SoupServer *server,
 		return;
 	}
 
+	kaa_endpoint_id *ids;
+
 	request_List_event();
 
-	soup_message_set_status(msg, SOUP_STATUS_OK);
+	/*
+	 * Wait until our data collected from server :)
+	*/
+
+	JsonGenerator *jgen;
+	gchar *jdata;
+	gsize jsize;
+
+	jgen = json_generator_new();
+	jdata = json_generator_to_data(jgen, &jsize);
+	if (jsize == 0) {
+		soup_message_set_status(msg, SOUP_STATUS_INTERNAL_SERVER_ERROR);
+	} else {
+		soup_message_set_response(msg, "application/json",
+				SOUP_MEMORY_TAKE, jdata, jsize);
+		soup_message_set_status(msg, SOUP_STATUS_OK);
+	}
 }
 
 static void default_event_callback(SoupServer *server,
