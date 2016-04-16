@@ -67,10 +67,10 @@ Trun the lamp on for specific interval
 - Data params
 : None
 
-- Success response:
+- Success response
 : Code: 200
 
-- Error response:
+- Error response
 :
 
 |   Status codes       |              Description               |
@@ -94,14 +94,15 @@ Return list of the avaible sink of lamps event.
 - Data params
 : None
 
-- Success response:
-: Code: 200
-: Body:
+- Success response
+:
+    - Code: 200
+    - Body:
 ```json
 [{"id":"19 1b 9e e8 6e db f9 a2 9f cc 5e 32 74 ac f0 f6 5c 84 8b cd "}]
 ```
 
-- Error response:
+- Error response
 :
 
 |   Status codes       |              Description               |
