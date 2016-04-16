@@ -15,6 +15,8 @@
 #include <libsoup/soup.h>
 #include <stdint.h>
 
+#include <kaa/kaa_common.h>
+
 #include "route.h"
 #include "event.h"
 
@@ -100,6 +102,8 @@ static void on_List_event_callback(SoupServer *server,
 		g_message("Invalid method: %s instead of GET", msg->method);
 		return;
 	}
+
+	request_List_event();
 
 	soup_message_set_status(msg, SOUP_STATUS_OK);
 }
