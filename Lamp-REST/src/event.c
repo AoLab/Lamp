@@ -73,21 +73,36 @@ void request_OnI_event(int64_t interval)
 {
 	kaa_error_t error_code;
 
-	/* Store interval on heap for future processing */
+	/* Create and send an event */
+	
+	kaa_lamp_event_family_oni_t *oni_request =
+		kaa_lamp_event_family_oni_create();
+	oni_request->interval = interval;
 
-	int64_t *interval_ptr = malloc(sizeof(int64_t));
+	error_code = kaa_event_manager_send_kaa_lamp_event_family_oni(
+			kaa_client_get_context(kaa_client)->event_manager
+			, oni_request
+			, NULL);
 
-	/* Find endpoint by event FQDN */
+	oni_request->destroy(oni_request);
+}
 
-	const char *fqns[] = {"ir.ac.aut.aolab.lamp.OnI"};
+void request_OnI_event_id(int64_t interval, kaa_endpoint_id id)
+{
+	kaa_error_t error_code;
 
-	kaa_event_listeners_callback_t callback = {interval_ptr, event_listeners_callback, event_listeners_request_failed};
+	/* Create and send an event */
+	
+	kaa_lamp_event_family_oni_t *oni_request =
+		kaa_lamp_event_family_oni_create();
+	oni_request->interval = interval;
 
-	error_code = kaa_event_manager_find_event_listeners(kaa_client_get_context(kaa_client)->event_manager
-			, fqns
-			, 1
-			, &callback);
-	//KAA_EXIT_IF_ERROR(error_code, "Failed to attach event listener");
+	error_code = kaa_event_manager_send_kaa_lamp_event_family_oni(
+			kaa_client_get_context(kaa_client)->event_manager
+			, oni_request
+			, id);
+
+	oni_request->destroy(oni_request);
 }
 
 void request_List_event(void) {
