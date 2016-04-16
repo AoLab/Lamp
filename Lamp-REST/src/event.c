@@ -27,6 +27,11 @@
 
 #include "kaa.h"
 
+struct kaa_endpoint_ids_context {
+	kaa_endpoint_id **ids;
+	size_t *ids_length;
+}
+
 static kaa_error_t event_listeners_callback(void *context,
 		const kaa_endpoint_id listeners[], size_t listeners_count)
 {
@@ -35,15 +40,19 @@ static kaa_error_t event_listeners_callback(void *context,
 	kaa_error_t error_code;
 	int i, j;
 
+	struct kaa_endpoint_ids_context c = context;
+	kaa_endpoint_id **ids = c->ids;
+	*ids = malloc(sizeof(kaa_endpoint_id) * sizeof(uint8_t) * listeners_count);
+	*(c->ids_length) = listeners_count;
+	
+	/* Send data to REST side :) */
 	for (i = 0; i < listeners_count; i++) {
 		for (j = 0; j < sizeof(kaa_endpoint_id); j++) {
+			(*ids)[i][j] = listeners[i][j];
 			printf("%hx ", listeners[i][j]);
 		}
 		printf("\n");
 	}
-
-	kaa_endpoint_id **ids = context;
-	*ids = listeners;
 
 	return KAA_ERR_NONE;
 }
@@ -98,7 +107,10 @@ void request_List_event(kaa_endpoint_id **ids, size_t *ids_length) {
 
 	const char *fqns[] = {"ir.ac.aut.ceit.aolab.lamp.OnI"};
 
-	kaa_event_listeners_callback_t callback = {ids, event_listeners_callback, event_listeners_request_failed};
+	struct kaa_endpoint_ids_context *c = malloc(sizeof(kaa_endpoint_ids_context));
+	c->ids = ids;
+	c->ids_length = ids_length;
+	kaa_event_listeners_callback_t callback = {c, event_listeners_callback, event_listeners_request_failed};
 
 	error_code = kaa_event_manager_find_event_listeners(kaa_client_get_context(kaa_client)->event_manager
 			, fqns
