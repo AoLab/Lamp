@@ -37,7 +37,7 @@ static kaa_error_t event_listeners_callback(void *context,
 
 	for (i = 0; i < listeners_count; i++) {
 		for (j = 0; j < sizeof(kaa_endpoint_id); j++) {
-			printf("%zx ", listeners[i][j]);
+			printf("%hx ", listeners[i][j]);
 		}
 		printf("\n");
 	}
