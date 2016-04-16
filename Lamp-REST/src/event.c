@@ -37,27 +37,10 @@ static kaa_error_t event_listeners_callback(void *context,
 
 	for (i = 0; i < listeners_count; i++) {
 		for (j = 0; j < sizeof(kaa_endpoint_id); j++) {
-			printf("%c ", listeners[i][j]);
+			printf("%zx ", listeners[i][j]);
 		}
+		printf("\n");
 	}
-
-	/* Restore interval parameter */
-	int64_t *interval_ptr = context;
-
-	/* Create and send an event */
-
-	kaa_lamp_event_family_oni_t *oni_request =
-		kaa_lamp_event_family_oni_create();
-	oni_request->interval = *interval_ptr;
-
-	error_code = kaa_event_manager_send_kaa_lamp_event_family_oni(
-			kaa_client_get_context(kaa_client)->event_manager
-			, oni_request
-			, NULL);
-	//KAA_RETURN_IF_ERROR(error_code, "Failed to send LEDOnEvent");
-
-	oni_request->destroy(oni_request);
-	free(context);
 
 	return KAA_ERR_NONE;
 }
@@ -106,4 +89,16 @@ void request_OnI_event_id(int64_t interval, kaa_endpoint_id id)
 }
 
 void request_List_event(void) {
+	kaa_error_t error_code;
+
+	/* Try to find event sinks by FQDN :) */
+
+	const char *fqns[] = {"ir.ac.aut.ceit.aolab.lamp.OnI"};
+
+	kaa_event_listeners_callback_t callback = {NULL, event_listeners_callback, event_listeners_request_failed};
+
+	error_code = kaa_event_manager_find_event_listeners(kaa_client_get_context(kaa_client)->event_manager
+			, fqns
+			, 1
+			, &callback);
 }
