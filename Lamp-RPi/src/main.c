@@ -28,12 +28,13 @@
 #include "notification.h"
 #include "user.h"
 #include "profile.h"
+#include "config.h"
 
 static kaa_client_t *kaa_client;
 
 int main(int argc, char *argv[])
 {
-	open_serial("/dev/tnt0");
+	open_serial(LAMP_SERIAL_PATH);
 
 	init_serial();
 
