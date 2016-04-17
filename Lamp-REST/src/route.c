@@ -40,32 +40,23 @@ static void on_On_event_callback(SoupServer *server,
 	if (g_strcmp0(path, "/Lamp/On")) {
 		soup_message_set_status(msg, SOUP_STATUS_NOT_FOUND);
 		g_message("Invalid path: %s instead of /Lamp/On", path);
+		gchar *message = g_strdup_printf("Invalid path: %s instead of /Lamp/On", path);
+		JsonNode *response = lamp_response_build(NULL, message, 0);
+		lamp_response_to_msg(response, msg);
 		return;
 	}
 
 	/*
-	 * We have OnI function with POST method ONLY :)
+	 * We have On function with POST method ONLY :)
 	 * so you get NOT IMPLEMENTED error with use other method
 	 * on it.
 	*/
 	if (msg->method != SOUP_METHOD_POST) {
 		soup_message_set_status(msg, SOUP_STATUS_NOT_IMPLEMENTED);
-		g_message("Invalid method: %s instead of POST", msg->method);
-		
-		gchar *message = g_strdup_printf("Invalid method: %s instead of POST", msg->method);
-		
-		gsize jsize;
+		g_message("Invalid method: %s instead of POST", msg->method);	
+		gchar *message = g_strdup_printf("Invalid method: %s instead of POST", msg->method);	
 		JsonNode *response = lamp_response_build(NULL, message, 0);
-		JsonGenerator *jgen = json_generator_new();
-		json_generator_set_root(jgen, response);
-		gchar *jdata = json_generator_to_data(jgen, &jsize);
-		if (jsize == 0) {
-			soup_message_set_status(msg, SOUP_STATUS_INTERNAL_SERVER_ERROR);
-		} else {
-			soup_message_set_response(msg, "application/json",
-					SOUP_MEMORY_TAKE, jdata, jsize);
-			soup_message_set_status(msg, SOUP_STATUS_OK);
-		}
+		lamp_response_to_msg(response, msg);
 		return;
 	}
 	
@@ -76,6 +67,8 @@ static void on_On_event_callback(SoupServer *server,
 		soup_message_set_status(msg, SOUP_STATUS_BAD_REQUEST);
 		g_message("Invalid JSON: %s", msg->request_body->data);
 		gchar *message = g_strdup_printf("Invalid JSON :)");
+		JsonNode *response = lamp_response_build(NULL, message, 0);
+		lamp_response_to_msg(response, msg);
 		return;
 	}
 	
@@ -91,6 +84,8 @@ static void on_On_event_callback(SoupServer *server,
 		soup_message_set_status(msg, SOUP_STATUS_BAD_REQUEST);
 		g_message("ID was not found in your JSON");
 		gchar *message = g_strdup_printf("ID was not found in your JSON");
+		JsonNode *response = lamp_response_build(NULL, message, 0);
+		lamp_response_to_msg(response, msg);
 		return;
 	}
 	char *id_str = json_node_dup_string(id_node);
@@ -261,6 +256,8 @@ static void on_List_event_callback(SoupServer *server,
 		soup_message_set_status(msg, SOUP_STATUS_NOT_FOUND);
 		g_message("Invalid path: %s instead of /Lamp/List", path);
 		gchar *message = g_strdup_printf("Invalid path: %s instead of /Lamp/List", path);
+		JsonNode *response = lamp_response_build(NULL, message, 0);
+		lamp_response_to_msg(response, msg);
 		return;
 	}
 
@@ -273,6 +270,8 @@ static void on_List_event_callback(SoupServer *server,
 		soup_message_set_status(msg, SOUP_STATUS_NOT_IMPLEMENTED);
 		g_message("Invalid method: %s instead of POST", msg->method);
 		gchar *message = g_strdup_printf("Invalid method: %s instead of POST", msg->method);
+		JsonNode *response = lamp_response_build(NULL, message, 0);
+		lamp_response_to_msg(response, msg);
 		return;
 	}
 
@@ -311,18 +310,8 @@ static void on_List_event_callback(SoupServer *server,
 	}
 	root = json_node_init_array(root, lamps_array);
 
-	gsize jsize;
 	JsonNode *response = lamp_response_build(root, NULL, 1);
-	JsonGenerator *jgen = json_generator_new();
-	json_generator_set_root(jgen, response);
-	gchar *jdata = json_generator_to_data(jgen, &jsize);
-	if (jsize == 0) {
-		soup_message_set_status(msg, SOUP_STATUS_INTERNAL_SERVER_ERROR);
-	} else {
-		soup_message_set_response(msg, "application/json",
-				SOUP_MEMORY_TAKE, jdata, jsize);
-		soup_message_set_status(msg, SOUP_STATUS_OK);
-	}
+	lamp_response_to_msg(response, msg);
 }
 
 static void default_event_callback(SoupServer *server,
