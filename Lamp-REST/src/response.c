@@ -34,7 +34,9 @@ JsonNode *lamp_response_build(JsonNode *data,
 	status_node = json_node_init_boolean(status_node, status);
 	json_object_set_member(response_object, "status", status_node);
 	
-	json_object_set_member(response_object, "data", data);
+	if (data) {
+		json_object_set_member(response_object, "data", data);
+	}
 
 	response_node = json_node_init_object(response_node, response_object);
 
