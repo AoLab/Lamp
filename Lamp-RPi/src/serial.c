@@ -46,7 +46,7 @@ void init_serial(void)
 
 	memset(&tio, 0, sizeof(tio));
 
-	cfsetspeed(&tio, B9600);
+	cfsetspeed(&tio, B115200);
 
 	tcsetattr(fd, TCSAFLUSH, &tio);
 	tcflush(fd, TCIOFLUSH);
