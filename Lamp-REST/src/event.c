@@ -35,8 +35,6 @@ struct kaa_endpoint_ids_context {
 static kaa_error_t event_listeners_callback(void *context,
 		const kaa_endpoint_id listeners[], size_t listeners_count)
 {
-	printf("Event Listerners: %zd\n", listeners_count);
-
 	kaa_error_t error_code;
 	int i, j;
 
@@ -49,9 +47,7 @@ static kaa_error_t event_listeners_callback(void *context,
 	for (i = 0; i < listeners_count; i++) {
 		for (j = 0; j < sizeof(kaa_endpoint_id); j++) {
 			(*ids)[i][j] = listeners[i][j];
-			printf("%hx ", listeners[i][j]);
 		}
-		printf("\n");
 	}
 
 	return KAA_ERR_NONE;
