@@ -21,6 +21,154 @@
 
 #include "route.h"
 #include "event.h"
+#include "response.h"
+
+static void on_On_event_callback(SoupServer *server,
+		SoupMessage *msg,
+		const char *path,
+		GHashTable *query,
+		SoupClientContext *client,
+		gpointer user_data)
+{
+	g_message("Start handling request for %s", path);
+
+	/*
+	 * You must enter the URL currectly we do not
+	 * handle /Lamp/On/foo or ... in this function.
+	 * We response to invalid URLs with NOT FOUND.
+	*/
+	if (g_strcmp0(path, "/Lamp/On")) {
+		soup_message_set_status(msg, SOUP_STATUS_NOT_FOUND);
+		g_message("Invalid path: %s instead of /Lamp/On", path);
+		return;
+	}
+
+	/*
+	 * We have OnI function with POST method ONLY :)
+	 * so you get NOT IMPLEMENTED error with use other method
+	 * on it.
+	*/
+	if (msg->method != SOUP_METHOD_POST) {
+		soup_message_set_status(msg, SOUP_STATUS_NOT_IMPLEMENTED);
+		g_message("Invalid method: %s instead of POST", msg->method);
+		
+		gchar *message = g_strdup_printf("Invalid method: %s instead of POST", msg->method);
+		
+		gsize jsize;
+		JsonNode *response = lamp_response_build(NULL, message, 0);
+		JsonGenerator *jgen = json_generator_new();
+		json_generator_set_root(jgen, response);
+		gchar *jdata = json_generator_to_data(jgen, &jsize);
+		if (jsize == 0) {
+			soup_message_set_status(msg, SOUP_STATUS_INTERNAL_SERVER_ERROR);
+		} else {
+			soup_message_set_response(msg, "application/json",
+					SOUP_MEMORY_TAKE, jdata, jsize);
+			soup_message_set_status(msg, SOUP_STATUS_OK);
+		}
+		return;
+	}
+	
+	JsonParser *jparser = json_parser_new();
+	GError *error;
+	if (!json_parser_load_from_data(jparser, msg->request_body->data,
+				msg->request_body->length, &error)) {
+		soup_message_set_status(msg, SOUP_STATUS_BAD_REQUEST);
+		g_message("Invalid JSON: %s", msg->request_body->data);
+		gchar *message = g_strdup_printf("Invalid JSON :)");
+		return;
+	}
+	
+	JsonNode *root;
+	root = json_parser_get_root(jparser);
+	
+	JsonObject *request;
+	request = json_node_get_object(root);
+	
+	JsonNode *id_node;
+	id_node = json_object_get_member(request, "id");
+	if (!id_node) {
+		soup_message_set_status(msg, SOUP_STATUS_BAD_REQUEST);
+		g_message("ID was not found in your JSON");
+		gchar *message = g_strdup_printf("ID was not found in your JSON");
+		return;
+	}
+	char *id_str = json_node_dup_string(id_node);
+}
+
+static void on_Off_event_callback(SoupServer *server,
+		SoupMessage *msg,
+		const char *path,
+		GHashTable *query,
+		SoupClientContext *client,
+		gpointer user_data)
+{
+	g_message("Start handling request for %s", path);
+
+	/*
+	 * You must enter the URL currectly we do not
+	 * handle /Lamp/Off/foo or ... in this function.
+	 * We response to invalid URLs with NOT FOUND.
+	*/
+	if (g_strcmp0(path, "/Lamp/On")) {
+		soup_message_set_status(msg, SOUP_STATUS_NOT_FOUND);
+		g_message("Invalid path: %s instead of /Lamp/Off", path);
+		return;
+	}
+
+	/*
+	 * We have OnI function with POST method ONLY :)
+	 * so you get NOT IMPLEMENTED error with use other method
+	 * on it.
+	*/
+	if (msg->method != SOUP_METHOD_POST) {
+		soup_message_set_status(msg, SOUP_STATUS_NOT_IMPLEMENTED);
+		g_message("Invalid method: %s instead of POST", msg->method);
+		
+		gchar *message = g_strdup_printf("Invalid method: %s instead of POST", msg->method);
+		
+		gsize jsize;
+		JsonNode *response = lamp_response_build(NULL, message, 0);
+		JsonGenerator *jgen = json_generator_new();
+		json_generator_set_root(jgen, response);
+		gchar *jdata = json_generator_to_data(jgen, &jsize);
+		if (jsize == 0) {
+			soup_message_set_status(msg, SOUP_STATUS_INTERNAL_SERVER_ERROR);
+		} else {
+			soup_message_set_response(msg, "application/json",
+					SOUP_MEMORY_TAKE, jdata, jsize);
+			soup_message_set_status(msg, SOUP_STATUS_OK);
+		}
+		return;
+	}
+	
+	JsonParser *jparser = json_parser_new();
+	GError *error;
+	if (!json_parser_load_from_data(jparser, msg->request_body->data,
+				msg->request_body->length, &error)) {
+		soup_message_set_status(msg, SOUP_STATUS_BAD_REQUEST);
+		g_message("Invalid JSON: %s", msg->request_body->data);
+		gchar *message = g_strdup_printf("Invalid JSON :)");
+		return;
+	}
+	
+	JsonNode *root;
+	root = json_parser_get_root(jparser);
+	
+	JsonObject *request;
+	request = json_node_get_object(root);
+	
+	JsonNode *id_node;
+	id_node = json_object_get_member(request, "id");
+	if (!id_node) {
+		soup_message_set_status(msg, SOUP_STATUS_BAD_REQUEST);
+		g_message("ID was not found in your JSON");
+		gchar *message = g_strdup_printf("ID was not found in your JSON");
+		return;
+	}
+	char *id_str = json_node_dup_string(id_node);
+
+}
 
 static void on_OnI_event_callback(SoupServer *server,
 		SoupMessage *msg,
@@ -54,11 +202,11 @@ static void on_OnI_event_callback(SoupServer *server,
 	}
 	
 	JsonParser *jparser = json_parser_new();
-	GError *error;
+	GError *error = NULL;
 	if (!json_parser_load_from_data(jparser, msg->request_body->data,
 				msg->request_body->length, &error)) {
 		soup_message_set_status(msg, SOUP_STATUS_BAD_REQUEST);
-		g_message("Invalid JSON :)");
+		g_message("Invalid JSON: %s", msg->request_body->data);
 		gchar *message = g_strdup_printf("Invalid JSON :)");
 		return;
 	}
@@ -80,8 +228,19 @@ static void on_OnI_event_callback(SoupServer *server,
 	int64_t interval = json_node_get_int(interval_node);
 
 	request_OnI_event(interval);
-
-	soup_message_set_status(msg, SOUP_STATUS_OK);
+	
+	gsize jsize;	
+	JsonNode *response = lamp_response_build(NULL, NULL, 1);
+	JsonGenerator *jgen = json_generator_new();
+	json_generator_set_root(jgen, response);
+	gchar *jdata = json_generator_to_data(jgen, &jsize);
+	if (jsize == 0) {
+		soup_message_set_status(msg, SOUP_STATUS_INTERNAL_SERVER_ERROR);
+	} else {
+		soup_message_set_response(msg, "application/json",
+				SOUP_MEMORY_TAKE, jdata, jsize);
+		soup_message_set_status(msg, SOUP_STATUS_OK);
+	}
 }
 
 static void on_List_event_callback(SoupServer *server,
@@ -127,9 +286,6 @@ static void on_List_event_callback(SoupServer *server,
 	*/
 	//while (!ids);
 
-	JsonGenerator *jgen;
-	gchar *jdata;
-	gsize jsize;
 	int i, j;
 
 	JsonNode *root = json_node_alloc();
@@ -155,9 +311,11 @@ static void on_List_event_callback(SoupServer *server,
 	}
 	root = json_node_init_array(root, lamps_array);
 
-	jgen = json_generator_new();
-	json_generator_set_root(jgen, root);
-	jdata = json_generator_to_data(jgen, &jsize);
+	gsize jsize;
+	JsonNode *response = lamp_response_build(root, NULL, 1);
+	JsonGenerator *jgen = json_generator_new();
+	json_generator_set_root(jgen, response);
+	gchar *jdata = json_generator_to_data(jgen, &jsize);
 	if (jsize == 0) {
 		soup_message_set_status(msg, SOUP_STATUS_INTERNAL_SERVER_ERROR);
 	} else {
@@ -181,6 +339,12 @@ static void default_event_callback(SoupServer *server,
 
 void rest_route_init(SoupServer *server)
 {
+	soup_server_add_handler(server, "/Lamp/Off",
+			on_Off_event_callback, NULL, NULL);
+	
+	soup_server_add_handler(server, "/Lamp/On",
+			on_On_event_callback, NULL, NULL);
+
 	soup_server_add_handler(server, "/Lamp/OnI",
 			on_OnI_event_callback, NULL, NULL);
 	
