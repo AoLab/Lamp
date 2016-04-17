@@ -1,0 +1,42 @@
+/*
+ * In The Name Of God
+ * ========================================
+ * [] File Name : response.c
+ *
+ * [] Creation Date : 17-04-2016
+ *
+ * [] Created By : Parham Alvani (parham.alvani@gmail.com)
+ * =======================================
+*/
+/*
+ * Copyright (c) 2016 Parham Alvani.
+*/
+#include <json-glib/json-glib.h>
+
+JsonNode *lamp_response_build(JsonNode *data,
+		const gchar *message, int status)
+{
+	JsonNode *response_node;
+	response_node = json_node_alloc();
+
+	JsonObject *response_object;
+	response_object = json_object_new();
+	
+	if (message) {
+		JsonNode *message_node;
+		message_node = json_node_alloc();
+		message_node = json_node_init_string(message_node, message);
+		json_object_set_member(response_object, "message", message_node);
+	}
+
+	JsonNode *status_node;
+	status_node = json_node_alloc();
+	status_node = json_node_init_boolean(status_node, status);
+	json_object_set_member(response_object, "status", status_node);
+	
+	json_object_set_member(response_object, "data", data);
+
+	response_node = json_node_init_object(response_node, response_object);
+
+	return response_node;
+}
