@@ -66,7 +66,7 @@ static void on_On_event_callback(SoupServer *server,
 				msg->request_body->length, &error)) {
 		soup_message_set_status(msg, SOUP_STATUS_BAD_REQUEST);
 		g_message("Invalid JSON: %s", msg->request_body->data);
-		gchar *message = g_strdup_printf("Invalid JSON :)");
+		gchar *message = g_strdup_printf("Invalid JSON: %s", msg->request_body->data);
 		JsonNode *response = lamp_response_build(NULL, message, 0);
 		lamp_response_to_msg(response, msg);
 		return;
