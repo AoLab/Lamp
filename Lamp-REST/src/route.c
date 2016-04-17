@@ -110,10 +110,10 @@ static void on_List_event_callback(SoupServer *server,
 	 * so you get NOT IMPLEMENTED error with use other method
 	 * on it.
 	*/
-	if (msg->method != SOUP_METHOD_GET) {
+	if (msg->method != SOUP_METHOD_POST) {
 		soup_message_set_status(msg, SOUP_STATUS_NOT_IMPLEMENTED);
-		g_message("Invalid method: %s instead of GET", msg->method);
-		gchar *message = g_strdup_printf("Invalid method: %s instead of GET", msg->method);
+		g_message("Invalid method: %s instead of POST", msg->method);
+		gchar *message = g_strdup_printf("Invalid method: %s instead of POST", msg->method);
 		return;
 	}
 
@@ -134,13 +134,16 @@ static void on_List_event_callback(SoupServer *server,
 
 	JsonNode *root = json_node_alloc();
 	JsonArray *lamps_array = json_array_sized_new(ids_length);
-	for (i = 0; i < ids_length; i++) {
+	for (i = 0; i < 3; i++) {
 		/* Get and Set lamp ids :) */
 		JsonNode *id_node = json_node_alloc();
-		char id_str[sizeof(kaa_endpoint_id) * 3];
+		char id_str[10];
+		/*
 		
 		for (j = 0; j < sizeof(kaa_endpoint_id); j++)
 			g_sprintf(id_str + 3 * j, "%02hx ", ids[i][j]);
+		*/
+		g_sprintf(id_str, "%d", i);
 
 		id_node = json_node_init_string(id_node, id_str);
 		
