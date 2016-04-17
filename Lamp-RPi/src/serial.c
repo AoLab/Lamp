@@ -36,30 +36,45 @@ void init_serial(void)
 {
 	TEST_FD();
 
+	/*
 	struct termios old_tio, tio;
 
-	/* ** Set serial port tio ** */
+	** Set serial port tio **
 
-	/* Backup port settings */
+	Backup port settings
 	tcgetattr(fd, &old_tio);
 	tcflush(fd, TCIOFLUSH);
 
 	memset(&tio, 0, sizeof(tio));
 
-	cfsetspeed(&tio, B115200);
+	//cfsetspeed(&tio, B9600);
 
 	tcsetattr(fd, TCSAFLUSH, &tio);
 	tcflush(fd, TCIOFLUSH);
+	*/
 }
 
-int writechar(char c)
+int write_command(const char *str)
 {
 	TEST_FD();
 
 	int put = 0;
 
-	put = write(fd, &c, 1);
+	put = write(fd, str, strlen(str));
+	printf("%d\n", put);
 	fsync(fd);
 
 	return put;
+}
+
+char readchar(void)
+{
+	TEST_FD();
+
+	char c;
+
+	if (!read(fd, &c, 1))
+		return 0;
+
+	return c;
 }
