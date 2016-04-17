@@ -13,6 +13,7 @@
 */
 
 #include <libsoup/soup.h>
+#include <glib/gprintf.h>
 #include <json-glib/json-glib.h>
 #include <stdint.h>
 
@@ -42,31 +43,41 @@ static void on_OnI_event_callback(SoupServer *server,
 	}
 
 	/*
-	 * We have OnI function with GET method ONLY :)
+	 * We have OnI function with POST method ONLY :)
 	 * so you get NOT IMPLEMENTED error with use other method
 	 * on it.
 	*/
-	if (msg->method != SOUP_METHOD_GET) {
+	if (msg->method != SOUP_METHOD_POST) {
 		soup_message_set_status(msg, SOUP_STATUS_NOT_IMPLEMENTED);
-		g_message("Invalid method: %s instead of GET", msg->method);
+		g_message("Invalid method: %s instead of POST", msg->method);
 		return;
 	}
-
-	if (query == NULL) {
+	
+	JsonParser *jparser = json_parser_new();
+	GError *error;
+	if (!json_parser_load_from_data(jparser, msg->request_body->data,
+				msg->request_body->length, &error)) {
 		soup_message_set_status(msg, SOUP_STATUS_BAD_REQUEST);
-		g_message("Interval not found");
+		g_message("Invalid JSON :)");
+		gchar *message = g_strdup_printf("Invalid JSON :)");
 		return;
 	}
-
-	const char *interval_str = g_hash_table_lookup(query, "interval");
-
-	if (interval_str == NULL) {
+	
+	JsonNode *root;
+	root = json_parser_get_root(jparser);
+	
+	JsonObject *request;
+	request = json_node_get_object(root);
+	
+	JsonNode *interval_node;
+	interval_node = json_object_get_member(request, "interval");
+	if (!interval_node) {
 		soup_message_set_status(msg, SOUP_STATUS_BAD_REQUEST);
-		g_message("Interval not found");
+		g_message("Interval not found in your JSON");
+		gchar *message = g_strdup_printf("Interval not found in your JSON");
 		return;
 	}
-
-	int64_t interval = g_ascii_strtoll(interval_str, NULL, 10);
+	int64_t interval = json_node_get_int(interval_node);
 
 	request_OnI_event(interval);
 
@@ -90,6 +101,7 @@ static void on_List_event_callback(SoupServer *server,
 	if (g_strcmp0(path, "/Lamp/List")) {
 		soup_message_set_status(msg, SOUP_STATUS_NOT_FOUND);
 		g_message("Invalid path: %s instead of /Lamp/List", path);
+		gchar *message = g_strdup_printf("Invalid path: %s instead of /Lamp/List", path);
 		return;
 	}
 
@@ -101,6 +113,7 @@ static void on_List_event_callback(SoupServer *server,
 	if (msg->method != SOUP_METHOD_GET) {
 		soup_message_set_status(msg, SOUP_STATUS_NOT_IMPLEMENTED);
 		g_message("Invalid method: %s instead of GET", msg->method);
+		gchar *message = g_strdup_printf("Invalid method: %s instead of GET", msg->method);
 		return;
 	}
 
@@ -114,8 +127,6 @@ static void on_List_event_callback(SoupServer *server,
 	*/
 	while (!ids);
 
-	printf("%p\n", ids);
-
 	JsonGenerator *jgen;
 	gchar *jdata;
 	gsize jsize;
@@ -128,11 +139,8 @@ static void on_List_event_callback(SoupServer *server,
 		JsonNode *id_node = json_node_alloc();
 		char id_str[sizeof(kaa_endpoint_id) * 3];
 		
-		for (j = 0; j < sizeof(kaa_endpoint_id); j++) {
-			printf("%02hx ", ids[i][j]);
-			sprintf(id_str + 3 * j, "%02hx ", ids[i][j]);
-		}
-		printf("\n");
+		for (j = 0; j < sizeof(kaa_endpoint_id); j++)
+			g_sprintf(id_str + 3 * j, "%02hx ", ids[i][j]);
 
 		id_node = json_node_init_string(id_node, id_str);
 		
