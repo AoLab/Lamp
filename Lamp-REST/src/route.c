@@ -120,12 +120,12 @@ static void on_List_event_callback(SoupServer *server,
 	kaa_endpoint_id *ids = NULL;
 	size_t ids_length;
 
-	request_List_event(&ids, &ids_length);
+	//request_List_event(&ids, &ids_length);
 
 	/*
 	 * Wait until our data collected from server :)
 	*/
-	while (!ids);
+	//while (!ids);
 
 	JsonGenerator *jgen;
 	gchar *jdata;
@@ -133,7 +133,7 @@ static void on_List_event_callback(SoupServer *server,
 	int i, j;
 
 	JsonNode *root = json_node_alloc();
-	JsonArray *lamps_array = json_array_sized_new(ids_length);
+	JsonArray *lamps_array = json_array_new();
 	for (i = 0; i < 3; i++) {
 		/* Get and Set lamp ids :) */
 		JsonNode *id_node = json_node_alloc();
