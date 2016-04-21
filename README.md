@@ -6,7 +6,8 @@
 * [Java Version](#java-version)  
 * [Project Timeline](#project-timeline)  
 * [Refrences](#refrences)  
-* [Steps](#steps)  
+* [Steps](#steps)    
+
 ## Introduction
 This project is intended to create an Internet of Things for Amirkabir University of Technology. This project uses [KAA](https://kaaproject.org) as the middle server. In this project we have created a system that can handle RESTful web services to turn the lamps on and off.
 ![Lamp Project Architecture](http://www.googledrive.com/host/0B33KzMHyLoH2eVNHWFJZdmthOVk/Lamp-Architecture-Main.jpg)
