@@ -2,7 +2,7 @@
 # Lamp
 ## Contents
 * [Introduction](#introduction)  
-* [Device Identification and Discovery](#device-identification-and discovery)  
+* [Device Identification and Discovery](#device-identification-and-discovery)  
 * [Java Version](#java-version)  
 * [Project Timeline](#project-timeline)  
 * [Refrences](#refrences)  
