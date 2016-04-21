@@ -1,8 +1,7 @@
 ![Lamp Project Logo](http://www.googledrive.com/host/0B33KzMHyLoH2eVNHWFJZdmthOVk/Lamp-Logo.png)
 # Lamp
 ## Introduction
-First Proof of Concepts after lot of TeX generation  
-This project is intended to create an Internet of Things for Amirkabir University of Technology. This project uses [KAA](https://kaaproject.org) as the middle server.
+This project is intended to create an Internet of Things for Amirkabir University of Technology. This project uses [KAA](https://kaaproject.org) as the middle server. In this project we have created a system that can handle RESTful web services to turn the lamps on and off.
 ![Lamp Project Architecture](http://www.googledrive.com/host/0B33KzMHyLoH2eVNHWFJZdmthOVk/Lamp-Architecture-Main.jpg)
 ![Lamp-REST Project Architecture](http://www.googledrive.com/host/0B33KzMHyLoH2eVNHWFJZdmthOVk/Lamp-Architecture-Lamp-REST.jpg)
 
@@ -48,6 +47,23 @@ sudo service kaa-node restart
 ```
 
 ## Lamp-REST API
+### Response structure
+#### No Error
+```json
+{
+    "status": true,
+    "data": [
+        {"id": 1}
+    ]
+}
+```
+#### Error
+```json
+{
+    "status": false,
+    "message": "Invalid path: /Lamp/On/foo instead of /Lamp/On"
+}
+```
 ### Turn The Lamp ON
 Trun the lamp on for specific interval
 
@@ -55,17 +71,14 @@ Trun the lamp on for specific interval
 : /Lamp/OnI
 
 - Method
-: `GET`
+: `POST`
 
-- URL params
+- JSON params
 :
 
 | Parameter |   Value  |              Description               |
 |:---------:|:--------:|:-------------------------------------- |
 |  interval |  integer | Duration the lamp is turned on         |
-
-- Data params
-: None
 
 - Success response
 : Code: 200
@@ -86,12 +99,9 @@ Return list of the avaible sink of lamps event.
 : /Lamp/List
 
 - Method
-: `GET`
+: `POST`
 
-- URL params
-: None
-
-- Data params
+- JSON params
 : None
 
 - Success response

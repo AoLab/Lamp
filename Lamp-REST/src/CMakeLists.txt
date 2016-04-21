@@ -11,7 +11,8 @@ add_executable(Lamp-REST.out main.c
 	route.h route.c
 	kaa.h kaa.c
 	event.h event.c
-	user.h user.c)
+	user.h user.c
+	response.h response.c)
 
 find_package(PkgConfig)
 pkg_check_modules(LIBSOUP REQUIRED libsoup-2.4)
