@@ -6,6 +6,7 @@
 * [Java Version](#java-version)
 * [Project Timeline](#project-timeline)
 * [Refrences](#refrences)
+* [Lamp-REST API](content/API.md)
 * [Steps](#steps)
 
 ## Introduction
@@ -53,9 +54,6 @@ And you can change embedding IP address of Kaa Node service in auto generated SD
 sudo sed -i 's/transport_public_interface=.*/transport_public_interface={IP ADDRESS}/' /etc/kaa-node/conf/kaa-node.properties
 sudo service kaa-node restart
 ```
-
-## Lamp-REST API
-{{md  content/API.md}}
 
 ## Contributors
 * [Prof. Bahador Bakhshi](http://ceit.aut.ac.ir/~bakhshis/)
