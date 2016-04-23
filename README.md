@@ -1,12 +1,12 @@
 ![Lamp Project Logo](http://www.googledrive.com/host/0B33KzMHyLoH2eVNHWFJZdmthOVk/Lamp-Logo.png)
 # Lamp
-## Contents
-* [Introduction](#introduction)  
-* [Device Identification and Discovery](#device-identification-and-discovery)  
-* [Java Version](#java-version)  
-* [Project Timeline](#project-timeline)  
-* [Refrences](#refrences)  
-* [Steps](#steps)    
+## Table of Contents
+* [Introduction](#introduction)
+* [Device Identification and Discovery](#device-identification-and-discovery)
+* [Java Version](#java-version)
+* [Project Timeline](#project-timeline)
+* [Refrences](#refrences)
+* [Steps](#steps)
 
 ## Introduction
 This project is intended to create an Internet of Things for Amirkabir University of Technology. This project uses [KAA](https://kaaproject.org) as the middle server. In this project we have created a system that can handle RESTful web services to turn the lamps on and off.
@@ -55,79 +55,7 @@ sudo service kaa-node restart
 ```
 
 ## Lamp-REST API
-### Response structure
-#### No Error
-```json
-{
-    "status": true,
-    "data": [
-        {"id": 1}
-    ]
-}
-```
-#### Error
-```json
-{
-    "status": false,
-    "message": "Invalid path: /Lamp/On/foo instead of /Lamp/On"
-}
-```
-### Turn The Lamp ON
-Trun the lamp on for specific interval
-
-- URL
-: /Lamp/OnI
-
-- Method
-: `POST`
-
-- JSON params
-:
-
-| Parameter |   Value  |              Description               |
-|:---------:|:--------:|:-------------------------------------- |
-|  interval |  integer | Duration the lamp is turned on         |
-
-- Success response
-: Code: 200
-
-- Error response
-:
-
-|   Status codes       |              Description               |
-|:--------------------:|:-------------------------------------- |
-|  400 Bad Request     | The specified parameters are not valid |
-|  404 Not Found       | The specified path was not found       |
-|  501 Not Implemented | The specified method was not valid     |
-
-### List The Lamps :)
-Return list of the avaible sink of lamps event.
-
-- URL
-: /Lamp/List
-
-- Method
-: `POST`
-
-- JSON params
-: None
-
-- Success response
-:
-    - Code: 200
-    - Body:
-    ```json
-[{"id":"19 1b 9e e8 6e db f9 a2 9f cc 5e 32 74 ac f0 f6 5c 84 8b cd "}]
-    ```
-
-- Error response
-:
-
-|   Status codes       |              Description               |
-|:--------------------:|:-------------------------------------- |
-|  400 Bad Request     | The specified parameters are not valid |
-|  404 Not Found       | The specified path was not found       |
-|  501 Not Implemented | The specified method was not valid     |
+{{md  content/API.md}}
 
 ## Contributors
 * [Prof. Bahador Bakhshi](http://ceit.aut.ac.ir/~bakhshis/)
