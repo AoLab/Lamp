@@ -11,9 +11,14 @@
 * [Some points about KAA 0.8.1](#some-points-about-kaa-081)
 
 ## Introduction
-This project is intended to create an Internet of Things for Amirkabir University of Technology. This project uses [KAA](https://kaaproject.org) as the middle server. In this project we have created a system that can handle RESTful web services to turn the lamps on and off.
+This project is intended to create an Internet of Things for Amirkabir University of Technology.
+This project uses [KAA](https://kaaproject.org) as the middle server.
+In this project we have created a system that can handle RESTful web services to turn the lamps on and off.
 ![Lamp Project Architecture](http://www.googledrive.com/host/0B33KzMHyLoH2eVNHWFJZdmthOVk/Lamp-Architecture-Main.jpg)
 ![Lamp-REST Project Architecture](http://www.googledrive.com/host/0B33KzMHyLoH2eVNHWFJZdmthOVk/Lamp-Architecture-Lamp-REST.jpg)
+### Senario I
+The *threshold* is defined by the user.
+If a person is present in the room and the lightning is less than user-defined *threshold* then some number of lamps are turned on!
 
 ## Device Identification and Discovery
 We use Kaa Endpoint Profile for device identification and discovery.
