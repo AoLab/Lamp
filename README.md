@@ -8,7 +8,7 @@
 * [Refrences](#refrences)
 * [Lamp-REST API](content/API.md)
 * [Steps](#steps)
-* [Some points about KAA 0.8.1](#some-points-about-kaa-0.8.1)
+* [Some points about KAA 0.8.1](#some-points-about-kaa-081)
 
 ## Introduction
 This project is intended to create an Internet of Things for Amirkabir University of Technology. This project uses [KAA](https://kaaproject.org) as the middle server. In this project we have created a system that can handle RESTful web services to turn the lamps on and off.
