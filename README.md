@@ -6,7 +6,7 @@
 * [Java Version](#java-version)
 * [Project Timeline](#project-timeline)
 * [Refrences](#refrences)
-* [Lamp-REST API](content/API.md)
+* [Lamp-REST API](doc/API.md)
 * [Steps](#steps)
 * [Some points about KAA 0.8.1](#some-points-about-kaa-081)
 
