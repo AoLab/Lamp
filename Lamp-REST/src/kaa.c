@@ -28,7 +28,7 @@ void kaa_start(void)
 {
 	g_message("Kaa client initiation started.");
 	kaa_error_t error_code;
-	
+
 	/* Build Kaa client */
 
 	error_code = kaa_client_create(&kaa_client, NULL);
@@ -38,8 +38,8 @@ void kaa_start(void)
 	}
 	g_message("Kaa client created susuccessfully");
 
-	/* Attach to user :) */	
-	
+	/* Attach to user :) */
+
 	attach_endpoint_to_user(
 			kaa_client_get_context(kaa_client)->user_manager,
 			"Parham",

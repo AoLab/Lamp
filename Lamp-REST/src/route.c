@@ -53,13 +53,13 @@ static void on_On_event_callback(SoupServer *server,
 	*/
 	if (msg->method != SOUP_METHOD_POST) {
 		soup_message_set_status(msg, SOUP_STATUS_NOT_IMPLEMENTED);
-		g_message("Invalid method: %s instead of POST", msg->method);	
-		gchar *message = g_strdup_printf("Invalid method: %s instead of POST", msg->method);	
+		g_message("Invalid method: %s instead of POST", msg->method);
+		gchar *message = g_strdup_printf("Invalid method: %s instead of POST", msg->method);
 		JsonNode *response = lamp_response_build(NULL, message, 0);
 		lamp_response_to_msg(response, msg);
 		return;
 	}
-	
+
 	JsonParser *jparser = json_parser_new();
 	GError *error;
 	if (!json_parser_load_from_data(jparser, msg->request_body->data,
@@ -71,13 +71,13 @@ static void on_On_event_callback(SoupServer *server,
 		lamp_response_to_msg(response, msg);
 		return;
 	}
-	
+
 	JsonNode *root;
 	root = json_parser_get_root(jparser);
-	
+
 	JsonObject *request;
 	request = json_node_get_object(root);
-	
+
 	JsonNode *id_node;
 	id_node = json_object_get_member(request, "id");
 	if (!id_node) {
@@ -119,9 +119,9 @@ static void on_Off_event_callback(SoupServer *server,
 	if (msg->method != SOUP_METHOD_POST) {
 		soup_message_set_status(msg, SOUP_STATUS_NOT_IMPLEMENTED);
 		g_message("Invalid method: %s instead of POST", msg->method);
-		
+
 		gchar *message = g_strdup_printf("Invalid method: %s instead of POST", msg->method);
-		
+
 		gsize jsize;
 		JsonNode *response = lamp_response_build(NULL, message, 0);
 		JsonGenerator *jgen = json_generator_new();
@@ -136,7 +136,7 @@ static void on_Off_event_callback(SoupServer *server,
 		}
 		return;
 	}
-	
+
 	JsonParser *jparser = json_parser_new();
 	GError *error;
 	if (!json_parser_load_from_data(jparser, msg->request_body->data,
@@ -146,13 +146,13 @@ static void on_Off_event_callback(SoupServer *server,
 		gchar *message = g_strdup_printf("Invalid JSON :)");
 		return;
 	}
-	
+
 	JsonNode *root;
 	root = json_parser_get_root(jparser);
-	
+
 	JsonObject *request;
 	request = json_node_get_object(root);
-	
+
 	JsonNode *id_node;
 	id_node = json_object_get_member(request, "id");
 	if (!id_node) {
@@ -195,7 +195,7 @@ static void on_OnI_event_callback(SoupServer *server,
 		g_message("Invalid method: %s instead of POST", msg->method);
 		return;
 	}
-	
+
 	JsonParser *jparser = json_parser_new();
 	GError *error = NULL;
 	if (!json_parser_load_from_data(jparser, msg->request_body->data,
@@ -205,13 +205,13 @@ static void on_OnI_event_callback(SoupServer *server,
 		gchar *message = g_strdup_printf("Invalid JSON :)");
 		return;
 	}
-	
+
 	JsonNode *root;
 	root = json_parser_get_root(jparser);
-	
+
 	JsonObject *request;
 	request = json_node_get_object(root);
-	
+
 	JsonNode *interval_node;
 	interval_node = json_object_get_member(request, "interval");
 	if (!interval_node) {
@@ -223,8 +223,8 @@ static void on_OnI_event_callback(SoupServer *server,
 	int64_t interval = json_node_get_int(interval_node);
 
 	request_OnI_event(interval);
-	
-	gsize jsize;	
+
+	gsize jsize;
 	JsonNode *response = lamp_response_build(NULL, NULL, 1);
 	JsonGenerator *jgen = json_generator_new();
 	json_generator_set_root(jgen, response);
@@ -294,14 +294,14 @@ static void on_List_event_callback(SoupServer *server,
 		JsonNode *id_node = json_node_alloc();
 		char id_str[10];
 		/*
-		
+
 		for (j = 0; j < sizeof(kaa_endpoint_id); j++)
 			g_sprintf(id_str + 3 * j, "%02hx ", ids[i][j]);
 		*/
 		g_sprintf(id_str, "%d", i);
 
 		id_node = json_node_init_string(id_node, id_str);
-		
+
 		JsonObject *lamp_object = json_object_new();
 		json_object_set_member(lamp_object, "id", id_node);
 		JsonNode *lamp_node = json_node_alloc();
@@ -330,13 +330,13 @@ void rest_route_init(SoupServer *server)
 {
 	soup_server_add_handler(server, "/Lamp/Off",
 			on_Off_event_callback, NULL, NULL);
-	
+
 	soup_server_add_handler(server, "/Lamp/On",
 			on_On_event_callback, NULL, NULL);
 
 	soup_server_add_handler(server, "/Lamp/OnI",
 			on_OnI_event_callback, NULL, NULL);
-	
+
 	soup_server_add_handler(server, "/Lamp/List",
 			on_List_event_callback, NULL, NULL);
 

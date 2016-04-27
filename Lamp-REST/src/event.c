@@ -42,7 +42,7 @@ static kaa_error_t event_listeners_callback(void *context,
 	kaa_endpoint_id **ids = c->ids;
 	*ids = malloc(sizeof(kaa_endpoint_id) * sizeof(uint8_t) * listeners_count);
 	*(c->ids_length) = listeners_count;
-	
+
 	/* Send data to REST side :) */
 	for (i = 0; i < listeners_count; i++) {
 		for (j = 0; j < sizeof(kaa_endpoint_id); j++) {
@@ -65,7 +65,7 @@ void request_OnI_event(int64_t interval)
 	kaa_error_t error_code;
 
 	/* Create and send an event */
-	
+
 	kaa_lamp_event_family_oni_t *oni_request =
 		kaa_lamp_event_family_oni_create();
 	oni_request->interval = interval;
@@ -83,7 +83,7 @@ void request_OnI_event_id(int64_t interval, kaa_endpoint_id id)
 	kaa_error_t error_code;
 
 	/* Create and send an event */
-	
+
 	kaa_lamp_event_family_oni_t *oni_request =
 		kaa_lamp_event_family_oni_create();
 	oni_request->interval = interval;
@@ -101,7 +101,7 @@ void request_On_event(const char *id)
 	kaa_error_t error_code;
 
 	/* Create and send an event */
-	
+
 	kaa_lamp_event_family_trun_t *trun_request =
 		kaa_lamp_event_family_turn_create();
 	trun_request->id;
@@ -120,7 +120,7 @@ void request_Off_event(const char *id)
 	kaa_error_t error_code;
 
 	/* Create and send an event */
-	
+
 	kaa_lamp_event_family_oni_t *turn_request =
 		kaa_lamp_event_family_turn_create();
 	turn_request->id;

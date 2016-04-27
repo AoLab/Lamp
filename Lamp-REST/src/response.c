@@ -22,7 +22,7 @@ JsonNode *lamp_response_build(JsonNode *data,
 
 	JsonObject *response_object;
 	response_object = json_object_new();
-	
+
 	if (message) {
 		JsonNode *message_node;
 		message_node = json_node_alloc();
@@ -34,7 +34,7 @@ JsonNode *lamp_response_build(JsonNode *data,
 	status_node = json_node_alloc();
 	status_node = json_node_init_boolean(status_node, status);
 	json_object_set_member(response_object, "status", status_node);
-	
+
 	if (data) {
 		json_object_set_member(response_object, "data", data);
 	}
