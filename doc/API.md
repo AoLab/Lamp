@@ -44,7 +44,7 @@ Trun the lamp on for specific interval
     |  404 Not Found       | The specified path was not found       |
     |  501 Not Implemented | The specified method was not valid     |
 
-## Turn The Lamp On
+## Turn The Lamp ON
 Trun the lamp on
 
 - URL
