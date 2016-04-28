@@ -1,16 +1,10 @@
-{
-	"createdTime": 1458711423834,
-	"createdUsername": "admin",
-	"id": "610",
-	"schema": [{
-		"type" : "record",
-		"name" : "OnI",
-		"namespace" : "ir.ac.aut.ceit.aolab.lamp",
-		"fields" : [{
-			"name" : "interval",
-			"type" : "int"
-		}],
-		"classType" : "event"
+[{
+	"type" : "record",
+	"name" : "OnI",
+	"namespace" : "ir.ac.aut.ceit.aolab.lamp",
+	"fields" : [{
+		"name" : "interval",
+		"type" : "int"
 	}],
-	"version": 1
-}
+	"classType" : "event"
+}]
