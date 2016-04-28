@@ -16,7 +16,7 @@
     "message": "Invalid path: /Lamp/On/foo instead of /Lamp/On"
 }
 ```
-## Turn The Lamp ON
+## Turn The Lamp ON in Interval
 Trun the lamp on for specific interval
 
 - URL
@@ -43,6 +43,63 @@ Trun the lamp on for specific interval
     |  400 Bad Request     | The specified parameters are not valid |
     |  404 Not Found       | The specified path was not found       |
     |  501 Not Implemented | The specified method was not valid     |
+
+## Turn The Lamp On
+Trun the lamp on
+
+- URL
+: /Lamp/On
+
+- Method
+: `POST`
+
+- JSON params
+:
+
+    | Parameter |   Value  |              Description               |
+    |:---------:|:--------:|:-------------------------------------- |
+    |     id    |  integer | Target lamp identificaiton             |
+
+- Success response
+: Code: 200
+
+- Error response
+:
+
+    |   Status codes       |              Description               |
+    |:--------------------:|:-------------------------------------- |
+    |  400 Bad Request     | The specified parameters are not valid |
+    |  404 Not Found       | The specified path was not found       |
+    |  501 Not Implemented | The specified method was not valid     |
+
+## Turn The Lamp OFF
+Trun the lamp off
+
+- URL
+: /Lamp/Off
+
+- Method
+: `POST`
+
+- JSON params
+:
+
+    | Parameter |   Value  |              Description               |
+    |:---------:|:--------:|:-------------------------------------- |
+    |     id    |  integer | Target lamp identificaiton             |
+
+- Success response
+: Code: 200
+
+- Error response
+:
+
+    |   Status codes       |              Description               |
+    |:--------------------:|:-------------------------------------- |
+    |  400 Bad Request     | The specified parameters are not valid |
+    |  404 Not Found       | The specified path was not found       |
+    |  501 Not Implemented | The specified method was not valid     |
+
 
 ## List The Lamps :)
 Return list of the avaible sink of lamps event.
