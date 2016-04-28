@@ -1,0 +1,10 @@
+{
+	"type" : "record",
+	"name" : "OnI",
+	"namespace" : "ir.ac.aut.ceit.aolab.lamp",
+	"fields" : [ {
+		"name" : "interval",
+		"type" : "int"
+	}],
+	"classType" : "event"
+}
