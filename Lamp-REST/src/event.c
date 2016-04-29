@@ -96,16 +96,16 @@ void request_OnI_event_id(int64_t interval, kaa_endpoint_id id)
 	oni_request->destroy(oni_request);
 }
 
-void request_On_event(const char *id)
+void request_On_event(uint32_t id)
 {
 	kaa_error_t error_code;
 
 	/* Create and send an event */
 
-	kaa_lamp_event_family_trun_t *trun_request =
+	kaa_lamp_event_family_turn_t *turn_request =
 		kaa_lamp_event_family_turn_create();
-	trun_request->id;
-	turn_request->turn = 1;
+	turn_request->id = id;
+	turn_request->on = 1;
 
 	error_code = kaa_event_manager_send_kaa_lamp_event_family_turn(
 			kaa_client_get_context(kaa_client)->event_manager
@@ -115,16 +115,16 @@ void request_On_event(const char *id)
 	turn_request->destroy(turn_request);
 }
 
-void request_Off_event(const char *id)
+void request_Off_event(uint32_t id)
 {
 	kaa_error_t error_code;
 
 	/* Create and send an event */
 
-	kaa_lamp_event_family_oni_t *turn_request =
+	kaa_lamp_event_family_turn_t *turn_request =
 		kaa_lamp_event_family_turn_create();
-	turn_request->id;
-	turn_request->turn = 0;
+	turn_request->id = id;
+	turn_request->on = 0;
 
 	error_code = kaa_event_manager_send_kaa_lamp_event_family_turn(
 			kaa_client_get_context(kaa_client)->event_manager
