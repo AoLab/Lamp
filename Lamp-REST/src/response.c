@@ -52,7 +52,7 @@ void lamp_response_to_msg(JsonNode *response, SoupMessage *msg)
 
 	jgen = json_generator_new();
 	json_generator_set_root(jgen, response);
-	data = json_generator_to_data(jgen, &jsize);
+	jdata = json_generator_to_data(jgen, &jsize);
 	if (jsize == 0) {
 		soup_message_set_status(msg, SOUP_STATUS_INTERNAL_SERVER_ERROR);
 	} else {
