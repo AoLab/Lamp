@@ -166,7 +166,10 @@ static void on_Off_event_callback(SoupServer *server,
 		lamp_response_to_msg(response, msg);
 		return;
 	}
-	char *id_str = json_node_dup_string(id_node);
+	uint32_t id = json_node_get_int(id_node);
+	
+	request_Off_event(id);
+
 }
 
 static void on_OnI_event_callback(SoupServer *server,
