@@ -19,6 +19,10 @@ void request_OnI_event(int64_t interval);
 
 void request_OnI_event_id(int64_t interval, kaa_endpoint_id id);
 
+void request_On_event(uint32_t id);
+
+void request_Off_event(uint32_t id);
+
 void request_List_event(kaa_endpoint_id **ids, size_t *ids_length);
 
 #endif
