@@ -19,9 +19,9 @@
 
 void lamp(int interval)
 {
-	write_command("2");
+	write_command("001");
 
 	sleep(interval);
 
-	write_command("1");
+	write_command("000");
 }

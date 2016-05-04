@@ -1,0 +1,21 @@
+{
+  "type" : "record",
+  "name" : "lamp_notification",
+  "namespace" : "ir.ac.aut.ceit.aolab",
+  "fields" : [ {
+    "name" : "id",
+    "type" : {
+      "type" : "string",
+      "avro.java.string" : "String"
+    },
+    "by_default" : "00",
+    "maxLength" : 2,
+    "inputType" : "plain"
+  }, {
+    "name" : "interval",
+    "type" : "int",
+    "displayName" : "",
+    "displayPrompt" : "",
+    "by_default" : 2
+  } ]
+}
