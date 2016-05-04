@@ -45,13 +45,11 @@ void init_serial(void)
 
 	memset(&tio, 0, sizeof(tio));
 
-	cfsetspeed(&tio, B9600);
+	cfsetispeed(&tio, B115200);
+	cfsetospeed(&tio, B115200);
+	tio.c_cflag |= (CS7 | CSTOPB | PARODD | PARENB);
 
-    tio.c_cflag |= (CS7 | CSTOPB | PARODD);
-
-	tcsetattr(fd, TCSAFLUSH, &tio);
-	tcflush(fd, TCIOFLUSH);
-
+	tcsetattr(fd, TCSANOW, &tio);
 }
 
 int write_command(const char *str)
