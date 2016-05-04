@@ -47,7 +47,7 @@ void init_serial(void)
 
 	cfsetspeed(&tio, B9600);
 
-    tio.c_cflag |= (CS7 | CSTOPB);
+    tio.c_cflag |= (CS7 | CSTOPB | PARODD);
 
 	tcsetattr(fd, TCSAFLUSH, &tio);
 	tcflush(fd, TCIOFLUSH);
