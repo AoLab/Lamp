@@ -62,7 +62,7 @@ class ANASER:
         temp = self.ser.read_until(b")")
         return temp[1:-1].decode('ascii')
 
-    def setLight(self, x, y, state):
+    def set_light(self, x, y, state):
         if type(x) == type(1) == type(y) and type(state) == type(True):
             if state:
                 k = 1
@@ -77,7 +77,7 @@ class ANASER:
                 return False
             return True
 
-    def getPIR(self, x):
+    def get_pir(self, x):
         pcom = self.comctr
         pmsg = self.msgctr
         if type(x) == type(1):
@@ -98,7 +98,7 @@ class ANASER:
             return int(res.group(1))
         return -1
 
-    def getLDR(self, x):
+    def get_ldr(self, x):
         pcom = self.comctr
         pmsg = self.msgctr
         if type(x) == type(1):
@@ -118,7 +118,7 @@ class ANASER:
             return int(res.group(1))
         return -1
 
-    def getLight(self, x, y):
+    def get_light(self, x, y):
         if type(x) == type(y) == type(1):
             pcom = self.comctr
             pmsg = self.comctr
