@@ -13,16 +13,19 @@ import serial
 
 
 class LampSerial:
+    interface = None
+
     def __new__(cls, *args, **kwargs):
-        cls.interface = serial.Serial()
-        cls.interface.open()
+        if cls.interface is None:
+            cls.interface = serial.Serial()
+            cls.interface.open()
 
     @classmethod
-    def __write_it(cls, msg: str):
+    def write_data(cls, msg: str):
         cls.interface.write((msg + "\n").encode('ascii'))
         print("Send msg:{}".format(msg))
 
     @classmethod
-    def __get_data(cls) -> str:
+    def read_data(cls) -> str:
         buffer = cls.interface.read_until(b")")
         return buffer[1:-1].decode('ascii')
