@@ -7,7 +7,7 @@
 # [] Created By : Parham Alvani (parham.alvani@gmail.com)
 # =======================================
 
-from lamp_serial.sys.serial import LampSerial
+from lamp_serial.sys.lserial import LampSerial
 
 
 class Lamp:
@@ -18,11 +18,9 @@ class Lamp:
         self.id = {'x': x, 'y': y}
 
     def set_light(self, state: bool):
-        if state:
-            k = 1
-        else:
-            k = 0
-        LampSerial.write_data("L{}{}{}".format(self.id['x'], self.id['y'], k))
+        k = 1 if state else 0
+        LampSerial().write_data(
+            "L{}{}{}".format(self.id['x'], self.id['y'], k))
 
     def get_light(self) -> bool:
         pass
