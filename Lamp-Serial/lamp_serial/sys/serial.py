@@ -18,11 +18,11 @@ class LampSerial:
         cls.interface.open()
 
     @classmethod
-    def __write_it(cls, msg):
+    def __write_it(cls, msg: str):
         cls.interface.write((msg + "\n").encode('ascii'))
         print("Send msg:{}".format(msg))
 
     @classmethod
-    def __get_data(cls, self):
-        temp = cls.interface.read_until(b")")
-        return temp[1:-1].decode('ascii')
+    def __get_data(cls) -> str:
+        buffer = cls.interface.read_until(b")")
+        return buffer[1:-1].decode('ascii')
