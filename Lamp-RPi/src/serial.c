@@ -36,18 +36,23 @@ void init_serial(void)
 {
 	TEST_FD();
 
-	struct termios old_tio, tio;
+	struct termios tio;
 
 	/** Set serial port tio **/
 
-	tcgetattr(fd, &old_tio);
+	tcgetattr(fd, &tio);
 	tcflush(fd, TCIOFLUSH);
-
-	memset(&tio, 0, sizeof(tio));
 
 	cfsetispeed(&tio, B115200);
 	cfsetospeed(&tio, B115200);
-	tio.c_cflag |= (CS7 | CSTOPB | PARODD | PARENB);
+	/*
+	 * DataBits: 8
+	 * EvenParity
+	 * No FlowControl
+	*/
+	tio.c_cflag |= (CS8 | CSTOPB | PARENB);
+	tio.c_cflag &= ~PARODD;
+	tio.c_iflag &= (IXON | IXOFF | IXANY);
 
 	tcsetattr(fd, TCSANOW, &tio);
 }
