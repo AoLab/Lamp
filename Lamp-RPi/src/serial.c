@@ -49,10 +49,17 @@ void init_serial(void)
 	 * DataBits: 8
 	 * EvenParity
 	 * No FlowControl
+	 * 1 StopBit
 	*/
-	tio.c_cflag |= (CS8 | CSTOPB | PARENB);
-	tio.c_cflag &= ~PARODD;
+	tio.c_cflag |= (CS8 | PARENB);
+	tio.c_cflag &= ~(PARODD | CSTOPB);
 	tio.c_iflag &= (IXON | IXOFF | IXANY);
+
+	/*
+	 * Check parity and strip it from packet
+	 * :D
+	*/
+	tio.c_iflag |= (INPCK | ISTRIP);
 
 	tcsetattr(fd, TCSANOW, &tio);
 }
