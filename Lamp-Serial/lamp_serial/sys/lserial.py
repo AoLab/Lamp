@@ -29,3 +29,7 @@ class LampSerial:
     def read_data(cls) -> str:
         buffer = cls.interface.read_until(b")")
         return buffer[1:-1].decode('ascii')
+
+
+class LampSerialServer:
+    pass
