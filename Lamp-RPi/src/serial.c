@@ -56,6 +56,11 @@ void init_serial(void)
 	tio.c_iflag &= (IXON | IXOFF | IXANY);
 
 	/*
+	 * Disable Hardware flow control
+	*/
+	tio.c_cflag &= ~CNEW_RTSCTS;
+
+	/*
 	 * Check parity and strip it from packet
 	 * :D
 	*/
