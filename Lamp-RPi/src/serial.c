@@ -55,7 +55,17 @@ int set_interface_attribs(int fd, int speed, int parity)
         tty.c_cflag |= (CLOCAL | CREAD);
 
 	/* shutoff parity */
-        tty.c_cflag &= ~PARENB;
+	if (!parity) {
+        	tty.c_cflag &= ~PARENB;
+	/* even parity */
+	} else if (parity > 0) {
+		tty.c_cflag |= PARENB;
+		tty.c_cflag &= ~PARODD;
+	/* odd parity */
+	} else {
+		tty.c_cflag |= PARENB;
+		tty.c_cflag |= PARODD;
+	}
 	
 	/* 1 stop bit */
         tty.c_cflag &= ~CSTOPB;
@@ -74,7 +84,7 @@ int set_interface_attribs(int fd, int speed, int parity)
 void init_serial(void)
 {
 	TEST_FD();
-	set_interface_attribs(fd, B115200, 0);
+	set_interface_attribs(fd, B115200, 1);
 }
 
 int write_command(const char *str)
