@@ -16,8 +16,6 @@
 
 void open_serial(const char *dev);
 
-void init_serial(void);
-
 int write_command(const char *str);
 
 char readchar(void);

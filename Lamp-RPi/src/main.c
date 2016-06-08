@@ -36,8 +36,6 @@ int main(int argc, char *argv[])
 {
 	open_serial(LAMP_SERIAL_PATH);
 
-	init_serial();
-
 	printf("Kaa SDK client started\n");
 	kaa_error_t error_code;
 
