@@ -16,8 +16,8 @@
 
 void open_serial(const char *dev);
 
-int write_command(const char *str);
+void write_command(const char *str);
 
-int read_status(char *str);
+int read_status(unsigned char *str, int buff_size);
 
 #endif

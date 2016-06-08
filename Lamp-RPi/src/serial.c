@@ -37,12 +37,12 @@ void open_serial(const char *dev)
 		sdie("RS232_OpenComport");
 }
 
-int write_command(const char *str)
+void write_command(const char *str)
 {
 	RS232_cputs(cport_nr, str);
 }
 
-int read_status(char *buff, int buff_size)
+int read_status(unsigned char *buff, int buff_size)
 {
 	return RS232_PollComport(cport_nr, buff, buff_size);
 }
