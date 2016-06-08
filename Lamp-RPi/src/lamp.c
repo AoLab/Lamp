@@ -17,11 +17,26 @@
 #include "lamp.h"
 #include "serial.h"
 
-void lamp(int interval)
+void on(const char id[2])
 {
-	write_command("001");
+	char command[5];
 
-	sleep(interval);
+	command[0] = 'L';
+	command[1] = id[0];
+	command[2] = id[1];
+	command[3] = '1';
+	command[4] = '\n';
+	write_command(command);
+}
 
-	write_command("000");
+void off(const char id[2])
+{
+	char command[5];
+
+	command[0] = 'L';
+	command[1] = id[0];
+	command[2] = id[1];
+	command[3] = '0';
+	command[4] = '\n';
+	write_command(command);
 }

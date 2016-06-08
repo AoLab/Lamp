@@ -15,6 +15,8 @@
 #ifndef LAMP_H
 #define LAMP_H
 
-void lamp(int interval);
+void on(const char id[2]);
+
+void off(const char id[2]);
 
 #endif
