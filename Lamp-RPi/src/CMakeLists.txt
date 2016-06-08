@@ -8,7 +8,7 @@
 # =======================================
 add_executable(Lamp-RPi.out main.c
 	serial.c serial.h
-	common.c common.h
+	log.c log.h
 	notification.c notification.h
 	event.c event.h
 	lamp.c lamp.h

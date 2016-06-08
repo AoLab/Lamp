@@ -16,7 +16,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "common.h"
+#include "log.h"
 
 void sdie(const char *fmt, ...)
 {
