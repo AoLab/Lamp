@@ -15,8 +15,8 @@
 #ifndef LAMP_H
 #define LAMP_H
 
-void on(const char id[2]);
+void lamp_on(const char id[2]);
 
-void off(const char id[2]);
+void lamp_off(const char id[2]);
 
 #endif

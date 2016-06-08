@@ -17,7 +17,7 @@
 #include "lamp.h"
 #include "serial.h"
 
-void on(const char id[2])
+void lamp_on(const char id[2])
 {
 	char command[5];
 
@@ -29,7 +29,7 @@ void on(const char id[2])
 	write_command(command);
 }
 
-void off(const char id[2])
+void lamp_off(const char id[2])
 {
 	char command[5];
 
