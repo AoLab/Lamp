@@ -11,9 +11,6 @@
 /*
  * Copyright (c) 2016 Parham Alvani.
 */
-
-#include <unistd.h>
-
 #include "lamp.h"
 #include "serial.h"
 
