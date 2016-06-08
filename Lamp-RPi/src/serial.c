@@ -23,7 +23,7 @@
 
 #include "serial.h"
 #include "rs232.h"
-#include "common.h"
+#include "log.h"
 
 static int cport_nr;
 
