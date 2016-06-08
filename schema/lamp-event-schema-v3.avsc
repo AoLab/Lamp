@@ -1,0 +1,22 @@
+[{
+	"type" : "record",
+	"name" : "TurnEvent",
+	"namespace" : "ir.ac.aut.ceit.aolab.jlamp",
+	"fields" : [{
+		"name" : "id",
+		"type" : "string"
+	}, {
+		"name" : "status",
+		"type" : "boolean"
+	}],
+	"classType" : "event"
+}, {
+	"type" : "record",
+	"name" : "StatusEvent",
+	"namespace" : "ir.ac.aut.ceit.aolab.lamp",
+	"fields" : [{
+		"name" : "id",
+		"type" : "string"
+	}],
+	"classType" : "event"
+}]
