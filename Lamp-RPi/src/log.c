@@ -18,9 +18,13 @@
 
 #include "log.h"
 
-void sdie(const char *fmt, ...)
+int log_create(struct logger *logger_p, size_t buffer_size, FILE *sink)
 {
-	char buf[MAX_BUFF];
+}
+
+void sdie(struct logger *self, const char *source_file, int lineno, const char *fmt, ...)
+{
+	char buf[self->buffer_size];
 	va_list args;
 
 	va_start(args, fmt);
@@ -29,11 +33,12 @@ void sdie(const char *fmt, ...)
 
 	perror(buf);
 	exit(EXIT_FAILURE);
+
 }
 
-void udie(const char *fmt, ...)
+void udie(struct logger *self, const char *source_file, int lineno, const char *fmt, ...)
 {
-	char buf[MAX_BUFF];
+	char buf[self->buffer_size];
 	va_list args;
 
 	va_start(args, fmt);
@@ -45,34 +50,17 @@ void udie(const char *fmt, ...)
 	buf[len] = '\n';
 	buf[len + 1] = 0;
 
-	fputs(buf, stderr);
+	fputs(buf, self->sink);
 	exit(EXIT_FAILURE);
+
 }
 
-void slog(const char *fmt, ...)
+void ulog(struct logger *self, const char *source_file, int lineno, int log_level, const char *fmt, ...)
 {
-#ifdef DEBUG
 	printf("DEBUG: ");
 	fflush(stdout);
 
-	char buf[MAX_BUFF];
-	va_list args;
-
-	va_start(args, fmt);
-	vsprintf(buf, fmt, args);
-	va_end(args);
-
-	perror(buf);
-#endif
-}
-
-void ulog(const char *fmt, ...)
-{
-#ifdef DEBUG
-	printf("DEBUG: ");
-	fflush(stdout);
-
-	char buf[MAX_BUFF];
+	char buf[self->buffer_size];
 	va_list args;
 
 	va_start(args, fmt);
@@ -84,6 +72,20 @@ void ulog(const char *fmt, ...)
 	buf[len] = '\n';
 	buf[len + 1] = 0;
 
-	fputs(buf, stderr);
-#endif
+	fputs(buf, self->sink);
 }
+
+void slog(struct logger *self, const char *source_file, int lineno, int log_level, const char *fmt, ...)
+{
+	printf("DEBUG: ");
+	fflush(stdout);
+
+	char buf[self->buffer_size];
+	va_list args;
+
+	va_start(args, fmt);
+	vsprintf(buf, fmt, args);
+	va_end(args);
+
+	perror(buf);
+}	
