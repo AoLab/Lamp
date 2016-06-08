@@ -18,6 +18,6 @@ void open_serial(const char *dev);
 
 int write_command(const char *str);
 
-char readchar(void);
+int read_status(char *str);
 
 #endif

@@ -22,92 +22,27 @@
 #include <errno.h>
 
 #include "serial.h"
+#include "rs232.h"
 #include "common.h"
 
-static int fd;
+static int cport_nr;
 
 void open_serial(const char *dev)
 {
-	fd = open(dev, O_RDWR | O_NOCTTY | O_NDELAY);
-	if (fd <= 0)
-		sdie("Unable to open %s - ", dev);
-	fcntl(fd, F_SETFL, 0);
-}
+	cport_nr = 24;
+	int bdrate = 115200;
+	char mode[] = {'8', 'E', '1', 0};
 
-int set_interface_attribs(int fd, int speed, int parity)
-{
-        struct termios tty;
-
-	if (tcgetattr (fd, &tty) != 0) {
-                sdie("tcgetattr");
-                return -1;
-        }
-
-	/* set the baud rate */
-        cfsetospeed (&tty, speed);
-        cfsetispeed (&tty, speed);
-
-	/* 8-bit chars */
-        tty.c_cflag &= ~CSIZE;
-	tty.c_cflag |= CS8;
-
-	/* ignore moden control and enable reading */
-        tty.c_cflag |= (CLOCAL | CREAD);
-
-	/* shutoff parity */
-	if (!parity) {
-        	tty.c_cflag &= ~PARENB;
-	/* even parity */
-	} else if (parity > 0) {
-		tty.c_cflag |= PARENB;
-		tty.c_cflag &= ~PARODD;
-	/* odd parity */
-	} else {
-		tty.c_cflag |= PARENB;
-		tty.c_cflag |= PARODD;
-	}
-	
-	/* 1 stop bit */
-        tty.c_cflag &= ~CSTOPB;
-
-	/* raw output */
-	tty.c_oflag = 0;
-
-        if (tcsetattr (fd, TCSANOW, &tty) != 0) {
-                sdie("tcsetattr");
-                return -1;
-        }
-
-        return 0;
-}
-
-void init_serial(void)
-{
-	TEST_FD();
-	set_interface_attribs(fd, B115200, 1);
+	if (RS232_OpenComport(cport_nr, bdrate, mode))
+		sdie("RS232_OpenComport");
 }
 
 int write_command(const char *str)
 {
-	TEST_FD();
-
-	int put = 0;
-
-	put = write(fd, str, strlen(str));
-	if (put < strlen(str))
-		slog("write(%d, %s, %zd) failed", fd, str, strlen(str));
-
-	return put;
+	RS232_cputs(cport_nr, str);
 }
 
-char readchar(void)
+int read_status(char *buff, int buff_size)
 {
-	TEST_FD();
-
-	char c;
-
-	if (!read(fd, &c, 1))
-		return 0;
-
-	return c;
+	return RS232_PollComport(cport_nr, buff, buff_size);
 }
