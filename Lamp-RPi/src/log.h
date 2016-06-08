@@ -12,21 +12,27 @@
 /*
  * Copyright (c) 2014 Parham Alvani.
 */
-#ifndef COMMON_H
-#define COMMON_H
+#ifndef LOG_H
+#define LOG_H
 
-#define MAX_BUFF (1000 * 1000)
+struct logger {
+	FILE *sink;
+	char *log_buffer;
+	size_t buffer_size;
+};
 
-void sdie(const char *fmt, ...)
-    __attribute__((format(printf, 1, 2)));
+int log_create(logger *logger_p, size_t buffer_size, FILE *sink);
 
-void udie(const char *fmt, ...)
-    __attribute__((format(printf, 1, 2)));
+void sdie(struct logger *self, const char *source_file, int lineno, const char *fmt, ...)
+    __attribute__((format(printf, 4, 5)));
 
-void ulog(const char *fmt, ...)
-    __attribute__((format(printf, 1, 2)));
+void udie(struct logger *self, const char *source_file, int lineno, const char *fmt, ...)
+    __attribute__((format(printf, 4, 5)));
 
-void slog(const char *fmt, ...)
-    __attribute__((format(printf, 1, 2)));
+void ulog(struct logger *self, const char *source_file, int lineno, int log_level, const char *fmt, ...)
+    __attribute__((format(printf, 5, 6)));
+
+void slog(struct logger *self, const char *source_file, int lineno, int log_level, const char *fmt, ...)
+    __attribute__((format(printf, 5, 6)));
 
 #endif
