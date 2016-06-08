@@ -21,7 +21,7 @@ struct logger {
 	size_t buffer_size;
 };
 
-int log_create(logger *logger_p, size_t buffer_size, FILE *sink);
+int log_create(struct logger *logger_p, size_t buffer_size, FILE *sink);
 
 void sdie(struct logger *self, const char *source_file, int lineno, const char *fmt, ...)
     __attribute__((format(printf, 4, 5)));
