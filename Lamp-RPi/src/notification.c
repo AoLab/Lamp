@@ -13,6 +13,7 @@
 */
 #include <stdint.h>
 #include <stdio.h>
+#include <unistd.h>
 
 #include <kaa/kaa_notification_manager.h>
 #include <kaa/kaa_error.h>
@@ -24,12 +25,19 @@
 static void on_notification(void *context,
 		uint64_t *topic_id, kaa_notification_t *notification)
 {
-	int interval = notification->interval;
+	int interval;
+	char id[2];
+	
+	interval = notification->interval;
+	id[0] = notification->id->data[0];
+	id[1] = notification->id->data[1];
 
 	printf("Notification for topic id '%lu' received\n", *topic_id);
 	printf("Notification interval: %d\n", interval);
 
-	lamp(interval);
+	lamp_on(id);
+	sleep(interval);
+	lamp_off(id);
 }
 
 static void on_topics_received(void *context, kaa_list_t *topics)
