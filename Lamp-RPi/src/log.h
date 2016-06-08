@@ -16,7 +16,6 @@
 #define COMMON_H
 
 #define MAX_BUFF (1000 * 1000)
-#define MAX_CONN (1024)
 
 void sdie(const char *fmt, ...)
     __attribute__((format(printf, 1, 2)));
