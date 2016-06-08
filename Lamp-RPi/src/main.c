@@ -65,10 +65,10 @@ int main(int argc, char *argv[])
 			"");
 
 	/* Register our location */
-	
+	/*
 	kaa_profile_register(
 			kaa_client_get_context(kaa_client)->profile_manager);
-
+	*/
 	int i;
 	kaa_digest_p hash = ((kaa_status_t *)(kaa_client_get_context(kaa_client)->status))->endpoint_public_key_hash;
 	for (i = 0; i < sizeof(kaa_digest); i++)

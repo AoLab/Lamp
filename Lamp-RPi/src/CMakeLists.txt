@@ -13,8 +13,7 @@ add_executable(Lamp-RPi.out main.c
 	event.c event.h
 	lamp.c lamp.h
 	user.c user.h
-	rs232.c rs232.h
-	profile.c profile.h)
+	rs232.c rs232.h)
 
 include_directories("${PROJECT_BINARY_DIR}")
 include_directories("${Lamp-RPi_SOURCE_DIR}/libs/src")
