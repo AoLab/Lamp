@@ -95,7 +95,7 @@ struct logger {
 
 int log_create(struct logger **logger_p, size_t buffer_size, FILE *sink);
 
-int global_log_create(size_t buffer_size, FILE *sink);
+int log_global_create(size_t buffer_size, FILE *sink);
 
 void sdie(struct logger *self, const char *source_file, int lineno, const char *fmt, ...)
     __attribute__((format(printf, 4, 5)));
@@ -113,37 +113,37 @@ void slog(struct logger *self, const char *source_file, int lineno, int log_leve
  * Shortcut macros for logging at various log levels
 */
 #if LOG_LEVEL_FATAL_ENABLED
-#define LOG_FATAL(logger, fmt, ...) ulog(logger, __FILE__, __LINE__, KAA_LOG_LEVEL_FATAL, fmt, __VA_ARGS__)
+#define LOG_FATAL(logger, fmt, ...) ulog(logger, __FILE__, __LINE__, KAA_LOG_LEVEL_FATAL, fmt, ## __VA_ARGS__)
 #else
 #define LOG_FATAL(...)
 #endif
 
 #if LOG_LEVEL_ERROR_ENABLED
-#define LOG_ERROR(logger, fmt, ...) ulog(logger, __FILE__, __LINE__, KAA_LOG_LEVEL_ERROR, fmt, __VA_ARGS__)
+#define LOG_ERROR(logger, fmt, ...) ulog(logger, __FILE__, __LINE__, KAA_LOG_LEVEL_ERROR, fmt, ## __VA_ARGS__)
 #else
 #define LOG_ERROR(...)
 #endif
 
 #if LOG_LEVEL_WARN_ENABLED
-#define LOG_WARN(logger, fmt, ...)  ulog(logger, __FILE__, __LINE__, KAA_LOG_LEVEL_WARN, fmt, __VA_ARGS__)
+#define LOG_WARN(logger, fmt, ...)  ulog(logger, __FILE__, __LINE__, KAA_LOG_LEVEL_WARN, fmt, ## __VA_ARGS__)
 #else
 #define LOG_WARN(...)
 #endif
 
 #if LOG_LEVEL_INFO_ENABLED
-#define LOG_INFO(logger, fmt, ...)  ulog(logger, __FILE__, __LINE__, KAA_LOG_LEVEL_INFO, fmt, __VA_ARGS__)
+#define LOG_INFO(logger, fmt, ...)  ulog(logger, __FILE__, __LINE__, KAA_LOG_LEVEL_INFO, fmt, ## __VA_ARGS__)
 #else
 #define LOG_INFO(...)
 #endif
 
 #if LOG_LEVEL_DEBUG_ENABLED
-#define LOG_DEBUG(logger, fmt, ...) ulog(logger, __FILE__, __LINE__, KAA_LOG_LEVEL_DEBUG, fmt, __VA_ARGS__)
+#define LOG_DEBUG(logger, fmt, ...) ulog(logger, __FILE__, __LINE__, KAA_LOG_LEVEL_DEBUG, fmt, ## __VA_ARGS__)
 #else
 #define LOG_DEBUG(...)
 #endif
 
 #if LOG_LEVEL_TRACE_ENABLED
-#define LOG_TRACE(logger, fmt, ...) ulog(logger, __FILE__, __LINE__, KAA_LOG_LEVEL_TRACE, fmt, __VA_ARGS__)
+#define LOG_TRACE(logger, fmt, ...) ulog(logger, __FILE__, __LINE__, KAA_LOG_LEVEL_TRACE, fmt, ## __VA_ARGS__)
 #else
 #define LOG_TRACE(...)
 #endif
