@@ -34,7 +34,7 @@ void open_serial(const char *dev)
 	char mode[] = {'8', 'E', '2', 0};
 
 	if (RS232_OpenComport(cport_nr, bdrate, mode))
-		sdie("RS232_OpenComport");
+		return;
 }
 
 void write_command(const char *str)
