@@ -98,7 +98,7 @@ void ulog(struct logger *self, const char *source_file, int lineno, int log_leve
 	timeinfo = localtime(&rawtime);
 
 	len = sprintf(self->log_buffer, LOG_PREFIX_FORMAT,
-			timeinfo->tm_year, timeinfo->tm_mon, timeinfo->tm_mday,
+			timeinfo->tm_year + 1900, timeinfo->tm_mon, timeinfo->tm_mday,
 			timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec,
 			log_level_name[log_level],
 			truncated_name, lineno, 0);
