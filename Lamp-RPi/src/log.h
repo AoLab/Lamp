@@ -15,6 +15,18 @@
 #ifndef LOG_H
 #define LOG_H
 
+/*
+ * global logger :)
+ * if you want global logging
+ * use global_log_create() function.
+*/
+extern struct logger *LOGGER;
+
+/*
+ * Logger structure that contains
+ * log buffer, log buffer size and
+ * log sink FILE.
+*/
 struct logger {
 	FILE *sink;
 	char *log_buffer;
@@ -81,7 +93,9 @@ struct logger {
 #define LOG_LEVEL_DEBUG_ENABLED     (MAX_LOG_LEVEL >= LOG_LEVEL_DEBUG)
 #define LOG_LEVEL_TRACE_ENABLED     (MAX_LOG_LEVEL >= LOG_LEVEL_TRACE)
 
-int log_create(struct logger *logger_p, size_t buffer_size, FILE *sink);
+int log_create(struct logger **logger_p, size_t buffer_size, FILE *sink);
+
+int global_log_create(size_t buffer_size, FILE *sink);
 
 void sdie(struct logger *self, const char *source_file, int lineno, const char *fmt, ...)
     __attribute__((format(printf, 4, 5)));
