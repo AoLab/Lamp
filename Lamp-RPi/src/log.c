@@ -43,11 +43,13 @@ int log_create(struct logger **logger_p, size_t buffer_size, FILE *sink)
 	(*logger_p)->sink = sink;
 	(*logger_p)->buffer_size = buffer_size;
 	(*logger_p)->log_buffer = malloc(sizeof(char) * buffer_size);
+
+	return 0;
 }
 
 int log_global_create(size_t buffer_size, FILE *sink)
 {
-	log_create(&LOGGER, buffer_size, sink);
+	return log_create(&LOGGER, buffer_size, sink);
 }
 
 void sdie(struct logger *self, const char *source_file, int lineno, const char *fmt, ...)
