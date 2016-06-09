@@ -29,15 +29,18 @@
 #include "user.h"
 #include "profile.h"
 #include "config.h"
+#include "log.h"
 
 static kaa_client_t *kaa_client;
 
 int main(int argc, char *argv[])
 {
-	open_serial(LAMP_SERIAL_PATH);
+	log_global_create(1024, stderr);
 
-	printf("Kaa SDK client started\n");
+	LOG_INFO(LOGGER, "Lamp-RPi started :)\n");
 	kaa_error_t error_code;
+	
+	open_serial(LAMP_SERIAL_PATH);
 
 	/* Build Kaa client */
 
