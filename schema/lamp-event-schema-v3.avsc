@@ -13,7 +13,7 @@
 }, {
 	"type" : "record",
 	"name" : "StatusEvent",
-	"namespace" : "ir.ac.aut.ceit.aolab.lamp",
+	"namespace" : "ir.ac.aut.ceit.aolab.jlamp",
 	"fields" : [{
 		"name" : "id",
 		"type" : "string"
