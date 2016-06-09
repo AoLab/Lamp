@@ -37,9 +37,9 @@ int main(int argc, char *argv[])
 {
 	log_global_create(1024, stderr);
 
-	LOG_INFO(LOGGER, "Lamp-RPi started :)\n");
+	LOG_INFO(LOGGER, "Lamp-RPi started\n");
 	kaa_error_t error_code;
-	
+
 	open_serial(LAMP_SERIAL_PATH);
 
 	/* Build Kaa client */
@@ -55,13 +55,13 @@ int main(int argc, char *argv[])
 	KAA_RETURN_IF_ERROR(error_code, "Failed to register notification");
 
 	/* Build event related things */
-	
+
 	error_code = kaa_event_register(
 			kaa_client_get_context(kaa_client)->event_manager);
 	KAA_RETURN_IF_ERROR(error_code, "Failed to register event");
 
-	/* Attach to user :) */	
-	
+	/* Attach to user :) */
+
 	attach_endpoint_to_user(
 			kaa_client_get_context(kaa_client)->user_manager,
 			"Parham",
