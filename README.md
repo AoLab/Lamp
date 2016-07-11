@@ -1,6 +1,7 @@
 ![Lamp Project Logo](http://www.googledrive.com/host/0B33KzMHyLoH2eVNHWFJZdmthOVk/Lamp-Logo.png)
 # RPi Plug
 ## Introduction
+![RPi Plug Architecture](http://aolab.github.io/documentation/architecture/RPi-Plug.jpg)
 ### Senario I
 The *threshold* is defined by the user.
 If a person is present in the room and the lightning is less than user-defined *threshold* then some number of lamps are turned on!
