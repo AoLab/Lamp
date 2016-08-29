@@ -11,7 +11,6 @@ add_executable(Lamp-RPi.out main.c
 	log.c log.h
 	notification.c notification.h
 	lamp.c lamp.h
-	user.c user.h
 	rs232.c rs232.h)
 
 include_directories("${PROJECT_BINARY_DIR}")
