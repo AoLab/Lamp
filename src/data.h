@@ -18,6 +18,6 @@
 #include <kaa/kaa_log.h>
 
 kaa_error_t kaa_data_register(kaa_log_collector_t *log_collector, kaa_logger_t *logger);
-void kaa_data_collector_start();
+void kaa_data_collector_start(kaa_log_collector_t *log_collector);
 
 #endif
