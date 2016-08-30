@@ -20,14 +20,12 @@
 #include <kaa/kaa_error.h>
 #include <kaa/kaa_status.h>
 #include <kaa/platform/kaa_client.h>
+#include <kaa/kaa_notification_manager.h>
 #include <kaa/utilities/kaa_log.h>
 
 #include "util.h"
-#include "event.h"
 #include "serial.h"
 #include "notification.h"
-#include "user.h"
-#include "profile.h"
 #include "config.h"
 #include "log.h"
 
@@ -37,10 +35,10 @@ int main(int argc, char *argv[])
 {
 	log_global_create(1024, stderr);
 
-	LOG_INFO(LOGGER, "Lamp-RPi started\n");
+	LOG_INFO(LOGGER, "RPi-Plug started\n");
 	kaa_error_t error_code;
 
-	open_serial(LAMP_SERIAL_PATH);
+	// open_serial(LAMP_SERIAL_PATH);
 
 	/* Build Kaa client */
 
@@ -53,17 +51,6 @@ int main(int argc, char *argv[])
 			kaa_client_get_context(
 				kaa_client)->notification_manager);
 	KAA_RETURN_IF_ERROR(error_code, "Failed to register notification");
-
-	/* Register our location */
-	/*
-	kaa_profile_register(
-			kaa_client_get_context(kaa_client)->profile_manager);
-	*/
-	int i;
-	kaa_digest_p hash = ((kaa_status_t *)(kaa_client_get_context(kaa_client)->status))->endpoint_public_key_hash;
-	for (i = 0; i < sizeof(kaa_digest); i++)
-		printf("%u ", hash[i]);
-	printf("\n");
 
 	error_code = kaa_client_start(kaa_client, NULL, NULL, 0);
 	KAA_RETURN_IF_ERROR(error_code, "Failed to start Kaa main loop");
