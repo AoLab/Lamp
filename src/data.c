@@ -78,9 +78,9 @@ kaa_error_t kaa_data_register(kaa_log_collector_t *log_collector, kaa_logger_t l
 	 */
 	kaa_log_bucket_constraints_t bucket_sizes = {
 		/* Bucket size in bytes */
-		.max_bucket_size       = 512,
+		.max_bucket_size = 512,
 		/* Maximum log count in one bucket */
-		.max_bucket_log_count  = 5,
+		.max_bucket_log_count = 5,
 	};
 
 	/*
