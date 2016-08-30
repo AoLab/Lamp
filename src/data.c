@@ -86,7 +86,7 @@ kaa_error_t kaa_data_register(kaa_log_collector_t *log_collector, kaa_logger_t l
 	/*
 	 * Initialize the log storage and strategy (by default it is not set)
 	 */
-	error_code = kaa_logging_init(kaa_client_get_context(kaa_client)->log_collector
+	error_code = kaa_logging_init(log_collector
 			, log_storage_context
 			, log_upload_strategy_context
 			, &bucket_sizes);
@@ -95,6 +95,11 @@ kaa_error_t kaa_data_register(kaa_log_collector_t *log_collector, kaa_logger_t l
 	/* Add listeners to a log collector */
 	kaa_logging_set_listeners(log_collector, &log_listener);
 
+	return error_code;
+}
+
+void kaa_data_collector_start()
+{
 	/* Create and add a log record */
 
 	kaa_user_log_record_t *log_record = kaa_logging_log_data_create();
@@ -107,9 +112,8 @@ kaa_error_t kaa_data_register(kaa_log_collector_t *log_collector, kaa_logger_t l
 	kaa_log_record_info_t log_info;
 
 	/* Add log record */
-	error_code = kaa_logging_add_record(kaa_client_get_context(kaa_client)->log_collector, log_record, &log_info);
-
-	/* Check error code */
+	error_code = kaa_logging_add_record(log_collector, log_record, &log_info);
+	KAA_RETURN_IF_ERROR(error_code, "Failed add log record");
 
 	log_record->destroy(log_record);
 }
