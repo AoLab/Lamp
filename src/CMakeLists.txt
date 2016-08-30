@@ -10,6 +10,7 @@ add_executable(Lamp-RPi.out main.c
 	serial.c serial.h
 	log.c log.h
 	notification.c notification.h
+	data.c data.h
 	lamp.c lamp.h
 	rs232.c rs232.h)
 
