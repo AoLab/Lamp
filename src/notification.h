@@ -14,6 +14,8 @@
 #ifndef NOTIFICATION_H
 #define NOTIFICATION_H
 
+#include <kaa/kaa_notification_manager.h>
+
 kaa_error_t kaa_notification_register(kaa_notification_manager_t *manager);
 
 #endif
