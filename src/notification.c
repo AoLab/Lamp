@@ -27,7 +27,7 @@ static void on_notification(void *context,
 {
 	int interval;
 	char id[2];
-	
+
 	interval = notification->interval;
 	id[0] = notification->id->data[0];
 	id[1] = notification->id->data[1];
