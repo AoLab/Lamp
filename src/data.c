@@ -6,6 +6,7 @@
  * [] Creation Date : 30-08-2016
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
+ * [] Improved By : Iman Tabrizian (tabrizian@outlook.com)
  * =======================================
  */
 /*
@@ -14,6 +15,7 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <unistd.h>
+#include <pthread.h>
 
 #include <kaa/kaa_logging.h>
 #include <kaa/kaa_log.h>
@@ -98,15 +100,15 @@ kaa_error_t kaa_data_register(kaa_log_collector_t *log_collector, kaa_logger_t l
 	return error_code;
 }
 
-void kaa_data_collector_start()
+void kaa_log_message(char *message, char *tag)
 {
 	/* Create and add a log record */
 
 	kaa_user_log_record_t *log_record = kaa_logging_log_data_create();
 
 	log_record->level = ENUM_LEVEL_KAA_TRACE;
-	log_record->tag = kaa_string_copy_create("SOME_TAG");
-	log_record->message = kaa_string_copy_create("SOME_MESSAGE");
+	log_record->tag = kaa_string_copy_create(tag);
+	log_record->message = kaa_string_copy_create(message);
 
 	/* Log information. Populated when log is added via kaa_logging_add_record() */
 	kaa_log_record_info_t log_info;
