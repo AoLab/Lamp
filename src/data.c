@@ -119,3 +119,18 @@ void kaa_log_message(char *message, char *tag)
 
 	log_record->destroy(log_record);
 }
+
+/* Sample task list to be passed to data provider thread */
+void *tasks() {
+    kaa_log_message("Recieved sth from nrf", "data.c");
+}
+
+void create_data_collecting_loop(void *(*run)()) {
+
+    pthread_t data_provider_thread;
+    return_code = pthread_create(&data_provider_thread, NULL, run, NULL);
+
+    if (return_code) {
+        KAA_RETURN_IF_ERROR(error_code, "Failed to create the pthread");
+    }
+}
