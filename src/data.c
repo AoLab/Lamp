@@ -100,7 +100,7 @@ kaa_error_t kaa_data_register(kaa_log_collector_t *log_collector, kaa_logger_t l
 	return error_code;
 }
 
-void kaa_log_message(char *message, char *tag)
+static void kaa_log_message(char *message, char *tag)
 {
 	/* Create and add a log record */
 
@@ -121,7 +121,7 @@ void kaa_log_message(char *message, char *tag)
 }
 
 /* Sample task list to be passed to data provider thread */
-void *tasks() {
+static void *tasks(void *) {
     kaa_log_message("Recieved sth from nrf", "data.c");
 }
 
