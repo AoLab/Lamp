@@ -54,6 +54,12 @@ static void timeout_log_delivery_callback(void *context,
 	LOG_INFO(LOGGER, "Log deliver process timed out");
 }
 
+/*
+ * Private global variables
+ */
+kaa_log_collector_t *log_collector_g;
+
+
 kaa_error_t kaa_data_register(kaa_log_collector_t *log_collector, kaa_logger_t looger)
 {
 	/*
@@ -97,6 +103,8 @@ kaa_error_t kaa_data_register(kaa_log_collector_t *log_collector, kaa_logger_t l
 	/* Add listeners to a log collector */
 	kaa_logging_set_listeners(log_collector, &log_listener);
 
+	log_collector_g = log_collector
+
 	return error_code;
 }
 
@@ -114,23 +122,24 @@ static void kaa_log_message(char *message, char *tag)
 	kaa_log_record_info_t log_info;
 
 	/* Add log record */
-	error_code = kaa_logging_add_record(log_collector, log_record, &log_info);
+	error_code = kaa_logging_add_record(log_collector_g, log_record, &log_info);
 	KAA_RETURN_IF_ERROR(error_code, "Failed add log record");
 
 	log_record->destroy(log_record);
 }
 
-/* Sample task list to be passed to data provider thread */
+/*
+ * Sample task list to be passed to data provider thread
+ */
 static void *tasks(void *) {
     kaa_log_message("Recieved sth from nrf", "data.c");
 }
 
-void create_data_collecting_loop(void *(*run)()) {
+void create_data_collecting_loop(void) {
 
-    pthread_t data_provider_thread;
-    return_code = pthread_create(&data_provider_thread, NULL, run, NULL);
+	pthread_t data_provider_thread;
+	int error_code;
 
-    if (return_code) {
-        KAA_RETURN_IF_ERROR(error_code, "Failed to create the pthread");
-    }
+	error_code = pthread_create(&data_provider_thread, NULL, tasks, NULL);
+	KAA_RETURN_IF_ERROR(error_code, "Failed to create the pthread");
 }
