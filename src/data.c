@@ -18,7 +18,7 @@
 #include <pthread.h>
 
 #include <kaa/kaa_logging.h>
-#include <kaa/kaa_log.h>
+#include <kaa/kaa_context.h>
 #include <kaa/gen/kaa_logging_gen.h>
 #include <kaa/platform/kaa_client.h>
 
@@ -59,8 +59,9 @@ static void timeout_log_delivery_callback(void *context,
  */
 kaa_log_collector_t *log_collector_g;
 
+struct kaa_logger_t;
 
-kaa_error_t kaa_data_register(kaa_log_collector_t *log_collector, kaa_logger_t looger)
+kaa_error_t kaa_data_register(kaa_log_collector_t *log_collector, kaa_logger_t *logger)
 {
 	/*
 	 * Log delivery listener callbacks.
@@ -112,18 +113,15 @@ static void kaa_log_message(char *message, char *tag)
 {
 	/* Create and add a log record */
 
-	kaa_user_log_record_t *log_record = kaa_logging_log_data_create();
+	kaa_user_log_record_t *log_record = kaa_logging_i1820_create();
 
-	log_record->level = ENUM_LEVEL_KAA_TRACE;
-	log_record->tag = kaa_string_copy_create(tag);
-	log_record->message = kaa_string_copy_create(message);
+	log_record->type = kaa_string_copy_create(tag);
 
 	/* Log information. Populated when log is added via kaa_logging_add_record() */
 	kaa_log_record_info_t log_info;
 
 	/* Add log record */
-	error_code = kaa_logging_add_record(log_collector_g, log_record, &log_info);
-	KAA_RETURN_IF_ERROR(error_code, "Failed add log record");
+	kaa_logging_add_record(log_collector_g, log_record, &log_info);
 
 	log_record->destroy(log_record);
 }
@@ -131,15 +129,18 @@ static void kaa_log_message(char *message, char *tag)
 /*
  * Sample task list to be passed to data provider thread
  */
-static void *tasks(void *) {
-    kaa_log_message("Recieved sth from nrf", "data.c");
+static void *tasks(void *input) {
+    kaa_log_message("Recieved sth from nrf", "temprature");
+    return NULL;
 }
 
-void create_data_collecting_loop(void) {
+kaa_error_t create_data_collecting_loop(void) {
 
 	pthread_t data_provider_thread;
 	int error_code;
 
 	error_code = pthread_create(&data_provider_thread, NULL, tasks, NULL);
 	KAA_RETURN_IF_ERROR(error_code, "Failed to create the pthread");
+
+	return error_code;
 }
