@@ -58,8 +58,10 @@ static void timeout_log_delivery_callback(void *context,
  * Private global variables
  */
 kaa_log_collector_t *log_collector_g;
+void *log_storage_context = NULL;
 
 struct kaa_logger_t;
+
 
 kaa_error_t kaa_data_register(kaa_log_collector_t *log_collector, kaa_logger_t *logger)
 {
@@ -104,7 +106,7 @@ kaa_error_t kaa_data_register(kaa_log_collector_t *log_collector, kaa_logger_t *
 	/* Add listeners to a log collector */
 	kaa_logging_set_listeners(log_collector, &log_listener);
 
-	log_collector_g = log_collector
+	log_collector_g = log_collector;
 
 	return error_code;
 }
@@ -115,7 +117,7 @@ static void kaa_log_message(char *message, char *tag)
 
 	kaa_user_log_record_t *log_record = kaa_logging_i1820_create();
 
-	log_record->type = kaa_string_copy_create(tag);
+//	log_record->type = kaa_string_copy_create(tag);
 
 	/* Log information. Populated when log is added via kaa_logging_add_record() */
 	kaa_log_record_info_t log_info;
