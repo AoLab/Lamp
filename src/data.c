@@ -116,7 +116,7 @@ static void kaa_log_message(char *message, char *tag)
 {
 	/* Create and add a log record */
 
-	kaa_user_log_record_t *log_record = kaa_logging_log_data_create();
+	kaa_user_log_record_t *log_record = kaa_logging_log_create();
 
 //	log_record->type = kaa_string_copy_create(tag);
 
