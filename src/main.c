@@ -29,6 +29,7 @@
 #include "notification.h"
 #include "config.h"
 #include "log.h"
+#include "data.h"
 
 static kaa_client_t *kaa_client;
 
