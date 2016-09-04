@@ -59,6 +59,7 @@ static void timeout_log_delivery_callback(void *context,
  */
 kaa_log_collector_t *log_collector_g;
 void *log_storage_context = NULL;
+void *log_upload_strategy_context = NULL;
 
 struct kaa_logger_t;
 
