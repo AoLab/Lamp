@@ -41,6 +41,8 @@ build/
 # Kaa auto generated files
 kaa_key.pub
 kaa_status.bin
+libs
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
