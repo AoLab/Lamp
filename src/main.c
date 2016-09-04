@@ -54,7 +54,7 @@ int main(int argc, char *argv[])
 				kaa_client)->notification_manager);
 	KAA_RETURN_IF_ERROR(error_code, "Failed to register notification");
 
-    create_data_collecting_loop();
+	create_data_collecting_loop();
 
 	error_code = kaa_client_start(kaa_client, NULL, NULL, 0);
 	KAA_RETURN_IF_ERROR(error_code, "Failed to start Kaa main loop");
