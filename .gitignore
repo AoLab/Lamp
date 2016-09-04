@@ -39,7 +39,6 @@ install_manifest.txt
 build/
 
 # Kaa auto generated files
-libs/
 kaa_key.pub
 kaa_status.bin
 # Byte-compiled / optimized / DLL files
