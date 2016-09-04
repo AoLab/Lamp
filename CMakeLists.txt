@@ -11,8 +11,9 @@ project(Lamp-RPi)
 enable_language(C)
 
 find_package(OpenSSL REQUIRED)
+find_package(Threads REQUIRED)
 
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -pthreads -std=gnu99 -g -Wall")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=gnu99 -g -Wall")
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/bin")
 
 set(LAMP_ROOM_NUMBER 203)
