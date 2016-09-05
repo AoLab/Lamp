@@ -16,7 +16,7 @@
 
 #include <kaa/kaa_logging.h>
 
-kaa_error_t kaa_data_register(kaa_log_collector_t *log_collector, kaa_logger_t *logger);
+kaa_error_t kaa_data_register(kaa_client_t *kaa_client);
 kaa_error_t create_data_collecting_loop(void);
 
 #endif
